@@ -1,8 +1,11 @@
+using System;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace BaseApi
@@ -20,7 +23,9 @@ namespace BaseApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddMediatR(typeof(Startup));
+            var assembly = AppDomain.CurrentDomain.Load("Domain");
+            services.AddMediatR(assembly);
+            services.AddAutoMapper(typeof(Profile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +43,12 @@ namespace BaseApi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
+        }
+
+        public void ConfigureDependency(IServiceCollection services)
+        {
+            services.TryAddSingleton(ViewModelMapping.Get());
+            
         }
     }
 }
