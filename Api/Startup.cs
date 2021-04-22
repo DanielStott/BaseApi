@@ -1,3 +1,5 @@
+using System;
+using AutoMapper;
 using Domain.Shared.Interfaces;
 using Domain.Users.Interfaces;
 using Domain.Users.Models;
@@ -23,6 +25,9 @@ namespace BaseApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            var assembly = AppDomain.CurrentDomain.Load("Domain");
+            services.AddMediatR(assembly);
+            services.AddAutoMapper(typeof(Profile));
             services.AddMediatR(typeof(Startup));
             ConfigureDependencyInjection(services);
         }
@@ -43,7 +48,7 @@ namespace BaseApi
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 
-        public void ConfigureDependencyInjection(IServiceCollection services)
+        private void ConfigureDependencyInjection(IServiceCollection services)
         {
             services.AddScoped<IContext<User>, UserContext>();
             services.AddScoped<IUserRepository, UserRepository>();
