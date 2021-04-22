@@ -1,9 +1,13 @@
+using Domain.Shared.Interfaces;
+using Domain.Users.Interfaces;
+using Domain.Users.Models;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Storage.Users;
 
 namespace BaseApi
 {
@@ -16,14 +20,13 @@ namespace BaseApi
 
         private IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddMediatR(typeof(Startup));
+            ConfigureDependencyInjection(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -38,6 +41,12 @@ namespace BaseApi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
+        }
+
+        public void ConfigureDependencyInjection(IServiceCollection services)
+        {
+            services.AddScoped<IContext<User>, UserContext>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }
