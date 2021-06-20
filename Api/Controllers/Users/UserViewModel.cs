@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BaseApi.Controllers.Users
+﻿namespace BaseApi.Controllers.Users
 {
+    using System;
+
     public class UserViewModel
     {
         public Guid Id { get; set; }

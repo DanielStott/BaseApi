@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-
-namespace Domain.Shared.Interfaces
+﻿namespace Domain.Shared.Interfaces
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public interface IContext<T> where T : class
     {
         public IQueryable<T> Entities { get; set; }

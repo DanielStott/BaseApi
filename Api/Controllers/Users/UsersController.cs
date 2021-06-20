@@ -1,16 +1,16 @@
-﻿using System.Threading.Tasks;
-using Domain.Users.Handlers;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace BaseApi.Controllers.Users
+﻿namespace BaseApi.Controllers.Users
 {
+    using System.Threading.Tasks;
+    using Domain.Users.Handlers;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
-        
+
         public UsersController(IMediator mediator)
         {
             _mediator = mediator;
@@ -23,9 +23,9 @@ namespace BaseApi.Controllers.Users
             var viewModel = new UserViewModel()
             {
                 Email = user.Email,
-                Id = user.Id
+                Id = user.Id,
             };
-            
+
             return viewModel;
         }
     }
