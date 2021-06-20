@@ -1,9 +1,8 @@
-﻿using Domain.Shared;
-using Domain.Shared.Interfaces;
-using Domain.Users.Models;
-
-namespace Domain.Users.Interfaces
+﻿namespace Domain.Users.Interfaces
 {
+    using Domain.Shared.Interfaces;
+    using Domain.Users.Models;
+
     public interface IUserRepository : IRepository<User>
     {
     }

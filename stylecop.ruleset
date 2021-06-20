@@ -63,7 +63,7 @@
         <Rule Id="SA1124"  Action="Warning" />          <!-- Do not use regions -->
         <Rule Id="SA1125"  Action="Warning" />          <!-- Use shorthand for nullable types -->
         <Rule Id="SA1126"  Action="None" />             <!-- Prefix calls correctly -->
-        <Rule Id="SA1127"  Action="Warning" />          <!-- Generic type constraints should be on their own line -->
+        <Rule Id="SA1127"  Action="None" />          <!-- Generic type constraints should be on their own line -->
         <Rule Id="SA1128"  Action="Warning" />          <!-- Put constructor initializers on their own line -->
         <Rule Id="SA1129"  Action="Warning" />          <!-- Do not use default value type constructor -->
         <Rule Id="SA1130"  Action="Warning" />          <!-- Use lambda syntax -->

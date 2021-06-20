@@ -18,7 +18,9 @@
 
         public async Task<User> Add(User entity)
         {
-            return (await Users.AddAsync(entity)).Entity;
+            var user = (await Users.AddAsync(entity)).Entity;
+            await SaveChangesAsync();
+            return user;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

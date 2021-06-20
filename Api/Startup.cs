@@ -1,4 +1,8 @@
+using System;
+using System.Reflection;
 using BaseApi.Configuration;
+using BaseApi.Controllers.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseApi
 {
@@ -25,8 +29,13 @@ namespace BaseApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddMediatR(typeof(Startup));
+
+            var domainAssembly = AppDomain.CurrentDomain.Load("Domain");
+            services.AddMediatR(domainAssembly);
             services.AddDependencyInjection();
+
+            services.AddDbContext<UserContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
