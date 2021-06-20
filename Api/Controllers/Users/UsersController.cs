@@ -16,7 +16,7 @@
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("")]
         public async Task<ActionResult<UserViewModel>> Create(CreateUser.Command command)
         {
             var user = await _mediator.Send(command);
