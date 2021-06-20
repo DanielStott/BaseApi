@@ -1,13 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
-        <LangVersion>default</LangVersion>
         <CodeAnalysisRuleSet>../stylecop.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="9.0.0" />
+      <Folder Include="Scripts" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="dbup-sqlserver" Version="4.5.0" />
       <PackageReference Include="StyleCop" Version="6.2.0" />
       <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
         <PrivateAssets>all</PrivateAssets>

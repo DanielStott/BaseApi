@@ -4,7 +4,7 @@ namespace Domain.Users.Models
 {
     public class User
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; private init; }
         public string Email { get; private set; }
         public string Password { get; private set; }
         public string FirstName { get; private set; }
@@ -19,6 +19,5 @@ namespace Domain.Users.Models
                 FirstName = firstName,
                 LastName = lastName
             };
-
     }
 }
