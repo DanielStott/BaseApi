@@ -11,7 +11,7 @@
         {
             var connectionString =
                 args.FirstOrDefault()
-                ?? "Server=(local)\\SqlExpress; Database=Master; Trusted_connection=true";
+                ?? "Server=(localdb)\\Master;Integrated Security=true;";
 
             var upgrader =
                 DeployChanges.To

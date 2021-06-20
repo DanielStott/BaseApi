@@ -1,3 +1,5 @@
+using BaseApi.Configuration;
+
 namespace BaseApi
 {
     using Domain.Shared.Interfaces;
@@ -24,7 +26,7 @@ namespace BaseApi
         {
             services.AddControllers();
             services.AddMediatR(typeof(Startup));
-            ConfigureDependencyInjection(services);
+            services.AddDependencyInjection();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,12 +43,6 @@ namespace BaseApi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
-        }
-
-        public void ConfigureDependencyInjection(IServiceCollection services)
-        {
-            services.AddScoped<IContext<User>, UserContext>();
-            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }
