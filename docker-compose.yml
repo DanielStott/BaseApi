@@ -1,0 +1,39 @@
+version: "3.3"
+    
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: 'testPW12345678!'
+      # MSSQL_PID: 'Express'
+    ports:
+      - '1433:1433'
+
+  cosmos-linux-emulator:
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator
+    restart: unless-stopped
+    ports:
+      - '8081:8081'
+      - '10251:10251'
+      - '10252:10252'
+      - '10253:10253'
+      - '10254:10254'
+    environment:
+      AZURE_COSMOS_EMULATOR_PARTITION_COUNT: 10 
+      AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE: 'true'
+      AZURE_COSMOS_EMULATOR_IP_ADDRESS_OVERRIDE: '172.18.0.1' 
+
+
+      # docker run 
+      # -p 8081:8081 
+      # -p 10251:10251 
+      # -p 10252:10252 
+      # -p 10253:10253 
+      # -p 10254:10254  
+      # -m 3g 
+      # --cpus=2.0 
+      # --name=test-linux-emulator 
+
+      # -it mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator
