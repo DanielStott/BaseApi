@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="dbup-sqlserver" Version="4.5.0" />
+      <PackageReference Include="Docker.DotNet" Version="3.125.4" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
       <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="5.0.0" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
