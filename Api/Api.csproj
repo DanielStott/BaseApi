@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <RootNamespace>BaseApi</RootNamespace>
         <LangVersion>latestmajor</LangVersion>
-        <CodeAnalysisRuleSet>../stylecop.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>$(solutiondir)/stylecop.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>
