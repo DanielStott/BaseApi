@@ -1,4 +1,6 @@
-﻿namespace Domain.Users.Handlers
+﻿using Domain.Shared.Attributes;
+
+namespace Domain.Users.Handlers
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -9,13 +11,15 @@
 
     public class CreateUser
     {
-        public record Command(
-            string Username,
-            string Email,
-            string Password,
-            string FirstName,
-            string LastName)
-            : IRequest<User>;
+        public record Command : IRequest<User>
+        {
+            public string Username { get; set; }
+            public string Email { get; set; }
+            [DontLog]
+            public string Password { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
 
         public class Validator : AbstractValidator<Command>
         {
@@ -23,20 +27,20 @@
             {
                 RuleFor(m => m.Username)
                     .MaximumLength(30)
-                    .Empty();
+                    .NotEmpty();
                 RuleFor(m => m.Email)
                     .MaximumLength(255)
                     .EmailAddress()
-                    .Empty();
+                    .NotEmpty();
                 RuleFor(m => m.Password)
                     .MaximumLength(255)
-                    .Empty();
+                    .NotEmpty();
                 RuleFor(m => m.FirstName)
                     .MaximumLength(255)
-                    .Empty();
+                    .NotEmpty();
                 RuleFor(m => m.LastName)
                     .MaximumLength(255)
-                    .Empty();
+                    .NotEmpty();
             }
         }
 

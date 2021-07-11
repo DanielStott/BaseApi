@@ -1,4 +1,5 @@
 using FluentValidation;
+using Serilog;
 
 namespace BaseApi
 {
@@ -37,6 +38,7 @@ namespace BaseApi
             services.AddAutoMapper(typeof(Profile));
             services.AddMediatR(typeof(Startup));
             services.AddValidatorsFromAssembly(assembly);
+            services.AddLogging(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
