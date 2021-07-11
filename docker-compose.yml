@@ -1,0 +1,12 @@
+version: "3.3"
+    
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: 'testPW12345678!'
+      # MSSQL_PID: 'Express'
+    ports:
+      - '30001:1433'

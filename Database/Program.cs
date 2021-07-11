@@ -1,17 +1,21 @@
 ﻿namespace Database
 {
     using System;
-    using System.Linq;
     using System.Reflection;
     using DbUp;
+    using Microsoft.Extensions.Configuration;
 
     internal static class Program
     {
         private static int Main(string[] args)
         {
-            var connectionString =
-                args.FirstOrDefault()
-                ?? "Data Source=localhost\\SQLExpress;Integrated Security=true;";
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var connectionString = config.GetConnectionString("Default");
+
+            EnsureDatabase.For.SqlDatabase(connectionString);
 
             var upgrader =
                 DeployChanges.To

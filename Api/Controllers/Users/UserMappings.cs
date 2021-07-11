@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using Domain.Users.Models;
-
-namespace BaseApi.Controllers.Users
+﻿namespace BaseApi.Controllers.Users
 {
+    using AutoMapper;
+    using Domain.Users.Models;
+
     public class UserMappings : Profile
     {
         public UserMappings()

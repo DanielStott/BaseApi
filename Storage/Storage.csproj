@@ -3,13 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <LangVersion>latestmajor</LangVersion>
-        <CodeAnalysisRuleSet>../stylecop.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>$(solutiondir)/stylecop.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
-      <PackageReference Include="StyleCop" Version="6.2.0" />
       <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
