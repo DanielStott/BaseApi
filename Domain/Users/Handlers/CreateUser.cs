@@ -4,11 +4,41 @@
     using System.Threading.Tasks;
     using Domain.Users.Interfaces;
     using Domain.Users.Models;
+    using FluentValidation;
     using MediatR;
 
     public class CreateUser
     {
-        public record Command(string Username, string Email, string Password, string FirstName, string LastName) : IRequest<User>;
+        public record Command(
+            string Username,
+            string Email,
+            string Password,
+            string FirstName,
+            string LastName)
+            : IRequest<User>;
+
+        public class Validator : AbstractValidator<Command>
+        {
+            public Validator()
+            {
+                RuleFor(m => m.Username)
+                    .MaximumLength(30)
+                    .Empty();
+                RuleFor(m => m.Email)
+                    .MaximumLength(255)
+                    .EmailAddress()
+                    .Empty();
+                RuleFor(m => m.Password)
+                    .MaximumLength(255)
+                    .Empty();
+                RuleFor(m => m.FirstName)
+                    .MaximumLength(255)
+                    .Empty();
+                RuleFor(m => m.LastName)
+                    .MaximumLength(255)
+                    .Empty();
+            }
+        }
 
         public class Handler : IRequestHandler<Command, User>
         {

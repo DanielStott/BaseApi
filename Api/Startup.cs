@@ -1,3 +1,5 @@
+using FluentValidation;
+
 namespace BaseApi
 {
     using System;
@@ -34,6 +36,7 @@ namespace BaseApi
             services.AddMediatR(assembly);
             services.AddAutoMapper(typeof(Profile));
             services.AddMediatR(typeof(Startup));
+            services.AddValidatorsFromAssembly(assembly);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
