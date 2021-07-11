@@ -7,7 +7,6 @@
 
     internal static class Program
     {
-
         private static int Main(string[] args)
         {
             var config = new ConfigurationBuilder()
