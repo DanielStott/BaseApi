@@ -6,7 +6,6 @@
         <option name="services">
           <list>
             <option value="sql" />
-            <option value="cosmos-linux-emulator" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker-compose.yml" />

@@ -1,29 +1,23 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-
-namespace Database
+﻿namespace Database
 {
     using System;
-    using System.Linq;
     using System.Reflection;
     using DbUp;
+    using Microsoft.Extensions.Configuration;
 
     internal static class Program
     {
 
         private static int Main(string[] args)
         {
-            // var t = Directory.GetParent(Directory.GetCurrentDirectory());
-            var basePath = AppDomain.CurrentDomain.Load("Api");
             var config = new ConfigurationBuilder()
-                .SetBasePath(basePath.Location)
-                .AddJsonFile($"appsettings.json")
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json")
                 .Build();
             var connectionString = config.GetConnectionString("Default");
-                // ?? "Data Source=localhost,1433;Initial Catalog=master;User Id=sa;Password=testPW12345678!;";
 
-            Console.WriteLine(connectionString);
+            EnsureDatabase.For.SqlDatabase(connectionString);
+
             var upgrader =
                 DeployChanges.To
                     .SqlDatabase(connectionString)
