@@ -1,11 +1,9 @@
-using FluentValidation;
-using Serilog;
-
 namespace BaseApi
 {
     using System;
     using AutoMapper;
     using BaseApi.Configuration;
+    using FluentValidation;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;

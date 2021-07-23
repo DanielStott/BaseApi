@@ -1,9 +1,8 @@
-﻿using Domain.Shared.Attributes;
-
-namespace Domain.Users.Handlers
+﻿namespace Domain.Users.Handlers
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Domain.Shared.Attributes;
     using Domain.Users.Interfaces;
     using Domain.Users.Models;
     using FluentValidation;
