@@ -1,10 +1,9 @@
-using FluentValidation;
-
 namespace BaseApi
 {
     using System;
     using AutoMapper;
     using BaseApi.Configuration;
+    using FluentValidation;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -37,6 +36,7 @@ namespace BaseApi
             services.AddAutoMapper(typeof(Profile));
             services.AddMediatR(typeof(Startup));
             services.AddValidatorsFromAssembly(assembly);
+            services.AddLogging(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

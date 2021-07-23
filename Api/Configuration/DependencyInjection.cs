@@ -16,6 +16,7 @@
             services.TryAddScoped<IContext<User>, UserContext>();
             services.TryAddScoped<IUserRepository, UserRepository>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
         }
     }
 }
