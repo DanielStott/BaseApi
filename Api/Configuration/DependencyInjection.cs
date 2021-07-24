@@ -1,4 +1,6 @@
-﻿namespace BaseApi.Configuration
+﻿using Microsoft.AspNetCore.Routing;
+
+namespace BaseApi.Configuration
 {
     using BaseApi.Configuration.Mediator;
     using Domain.Shared.Interfaces;
@@ -15,6 +17,8 @@
         {
             services.TryAddScoped<IContext<User>, UserContext>();
             services.TryAddScoped<IUserRepository, UserRepository>();
+            services.TryAddScoped<IUserRepository, UserRepository>();
+            services.TryAddScoped<LinkGenerator>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         }
     }

@@ -23,20 +23,20 @@
             {
                 RuleFor(m => m.Username)
                     .MaximumLength(30)
-                    .Empty();
+                    .NotEmpty();
                 RuleFor(m => m.Email)
                     .MaximumLength(255)
                     .EmailAddress()
-                    .Empty();
+                    .NotEmpty();
                 RuleFor(m => m.Password)
                     .MaximumLength(255)
-                    .Empty();
+                    .NotEmpty();
                 RuleFor(m => m.FirstName)
                     .MaximumLength(255)
-                    .Empty();
+                    .NotEmpty();
                 RuleFor(m => m.LastName)
                     .MaximumLength(255)
-                    .Empty();
+                    .NotEmpty();
             }
         }
 

@@ -1,3 +1,4 @@
+using BaseApi.Controllers.Users;
 using FluentValidation;
 
 namespace BaseApi
@@ -25,7 +26,9 @@ namespace BaseApi
 
         public virtual void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddApplicationPart(typeof(UsersController).Assembly);
             services.AddDependencyInjection();
 
             services.AddDbContext<UserContext>(options =>
