@@ -1,4 +1,4 @@
-﻿namespace BaseApi.Controllers.Users
+﻿namespace Api.Controllers.Users
 {
     using System.Threading.Tasks;
     using AutoMapper;

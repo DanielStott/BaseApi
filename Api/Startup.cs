@@ -1,11 +1,9 @@
-using BaseApi.Controllers.Users;
-using FluentValidation;
-
-namespace BaseApi
+namespace Api
 {
     using System;
-    using AutoMapper;
-    using BaseApi.Configuration;
+    using Api.Configuration;
+    using Api.Controllers.Users;
+    using FluentValidation;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -31,14 +29,20 @@ namespace BaseApi
                 .AddApplicationPart(typeof(UsersController).Assembly);
             services.AddDependencyInjection();
 
-            services.AddDbContext<UserContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            ConfigureStorage(services);
 
             var assembly = AppDomain.CurrentDomain.Load("Domain");
             services.AddMediatR(assembly);
-            services.AddAutoMapper(typeof(Profile));
+            services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(typeof(Startup));
             services.AddValidatorsFromAssembly(assembly);
+            services.AddLogging(Configuration);
+        }
+
+        public virtual void ConfigureStorage(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddDbContext<UserContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

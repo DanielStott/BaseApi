@@ -1,6 +1,7 @@
 ﻿namespace End2End
 {
-    using BaseApi;
+    using Api;
+    using Data;
     using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -20,17 +21,23 @@
 
         public override void ConfigureServices(IServiceCollection serviceCollection)
         {
-            ConfigureDatabase(serviceCollection);
+            ConfigureStorage(serviceCollection);
+            ConfigureDependencies(serviceCollection);
 
             base.ConfigureServices(serviceCollection);
         }
 
-        private void ConfigureDatabase(IServiceCollection serviceCollection)
+        private void ConfigureDependencies(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddSingleton<Seeder>();
+        }
+
+        public override void ConfigureStorage(IServiceCollection serviceCollection)
         {
             serviceCollection
                 .AddDbContext<UserContext>(options =>
                 {
-                    options.UseSqlServer(_connection);
+                    options.UseSqlite(_connection);
                 });
         }
     }

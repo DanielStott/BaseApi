@@ -1,7 +1,7 @@
-﻿namespace End2End
+﻿namespace End2End.Users
 {
     using System.Threading.Tasks;
-    using BaseApi.Controllers.Users;
+    using Api.Controllers.Users;
     using Domain.Users.Handlers;
     using NUnit.Framework;
 
@@ -10,8 +10,15 @@
         [Test]
         public async Task successfully_create_user()
         {
-            var command =
-                new CreateUser.Command("test", "test@test.com", "password", "test", "test");
+            var command = new CreateUser.Command
+            {
+               Username = "test",
+               Email = "test@test.com",
+               Password = "password",
+               FirstName = "test",
+               LastName = "test",
+            };
+
             var user = await TestApi.Post<CreateUser.Command, UserViewModel>(nameof(UsersController.Create), command);
 
             Assert.Multiple(() =>

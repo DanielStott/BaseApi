@@ -19,8 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Scripts\001_CreateUsersTable.sql" />
-      <EmbeddedResource Include="Scripts\001_CreateUsersTable.sql" />
+      <EmbeddedResource Include="Scripts\**" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,6 +4,7 @@
     using System.Net.Http;
     using System.Net.Http.Json;
     using System.Threading.Tasks;
+    using Data;
     using Domain.Shared.Extensions;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,9 @@
         {
             TestApplicationFactory = new TestApplicationFactory<TestStartup>();
             Client = TestApplicationFactory.CreateClient();
-            LinkGenerator = TestApplicationFactory.Services.GetService<LinkGenerator>();
+            LinkGenerator = GetService<LinkGenerator>();
+            var seeder = GetService<Seeder>();
+            seeder.Seed();
         }
 
         public static async Task<(T, HttpStatusCode)> Get<T>(string endpointName, object urlValues = null)
@@ -43,5 +46,8 @@
 
         private static string GetUrl(string endpointName, object values)
             => $"http://localhost{LinkGenerator.GetPathByName(endpointName, values)}";
+
+        public static T GetService<T>()
+            => TestApplicationFactory.Services.GetService<T>();
     }
 }

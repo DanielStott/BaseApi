@@ -10,5 +10,6 @@
         Task<T> Get(T entity);
         Task<IEnumerable<T>> GetAll();
         Task<T> Add(T entity);
+        Task<IEnumerable<T>> AddRange(IEnumerable<T> entities);
     }
 }

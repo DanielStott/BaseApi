@@ -2,6 +2,7 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Domain.Shared.Attributes;
     using Domain.Users.Interfaces;
     using Domain.Users.Models;
     using FluentValidation;
@@ -9,13 +10,15 @@
 
     public class CreateUser
     {
-        public record Command(
-            string Username,
-            string Email,
-            string Password,
-            string FirstName,
-            string LastName)
-            : IRequest<User>;
+        public record Command : IRequest<User>
+        {
+            public string Username { get; set; }
+            public string Email { get; set; }
+            [DontLog]
+            public string Password { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
 
         public class Validator : AbstractValidator<Command>
         {
