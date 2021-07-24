@@ -23,10 +23,9 @@ namespace BaseApi
             Configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
             services.AddDependencyInjection();
 
             services.AddDbContext<UserContext>(options =>
