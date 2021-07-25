@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Domain.Users.Handlers
+﻿namespace Domain.Users.Handlers
 {
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using Domain.Shared.Attributes;

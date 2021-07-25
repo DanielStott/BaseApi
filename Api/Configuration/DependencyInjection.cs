@@ -1,13 +1,11 @@
-﻿using Api.Configuration.Mediator;
-using Microsoft.AspNetCore.Routing;
-
-namespace Api.Configuration
+﻿namespace Api.Configuration
 {
     using Api.Configuration.Mediator;
     using Domain.Shared.Interfaces;
     using Domain.Users.Interfaces;
     using Domain.Users.Models;
     using MediatR;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Storage.Users;

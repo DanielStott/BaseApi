@@ -2,7 +2,7 @@ namespace Api
 {
     using System;
     using Api.Configuration;
-    using Api.Controllers.Users;
+    using Api.Configuration.Middleware;
     using FluentValidation;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
@@ -57,6 +57,8 @@ namespace Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseExceptionHandler(ExceptionMiddleware.Handler);
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }

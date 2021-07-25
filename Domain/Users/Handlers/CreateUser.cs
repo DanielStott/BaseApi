@@ -1,4 +1,6 @@
-﻿namespace Domain.Users.Handlers
+﻿using Domain.Shared.Exceptions;
+
+namespace Domain.Users.Handlers
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -54,11 +56,26 @@
 
             public async Task<User> Handle(Command request, CancellationToken cancellationToken)
             {
+                await ValidateRequest(request);
+
                 var user = User.Create(request.Username, request.Email, request.Password, request.FirstName, request.LastName);
 
                 var createdUser = await _userRepository.Add(user);
 
                 return createdUser;
+            }
+
+            private async Task ValidateRequest(Command request)
+            {
+                var userAlreadyExists = await _userRepository.GetByEmailOrUsername(request.Email, request.Username);
+
+                if (userAlreadyExists is not null)
+                {
+                    if (userAlreadyExists.Username == request.Username)
+                        throw new AlreadyExistsExceptions(nameof(request.Username));
+
+                    throw new AlreadyExistsExceptions(nameof(request.Email));
+                }
             }
         }
     }
