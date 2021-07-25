@@ -1,10 +1,8 @@
-using BaseApi.Configuration.Middleware;
-
-namespace BaseApi
+namespace Api
 {
     using System;
-    using AutoMapper;
-    using BaseApi.Configuration;
+    using Api.Configuration;
+    using Api.Configuration.Middleware;
     using FluentValidation;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
@@ -24,21 +22,27 @@ namespace BaseApi
             Configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public virtual void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
+            services
+                .AddControllers()
+                .AddApplicationPart(AppDomain.CurrentDomain.Load("Api"));
             services.AddDependencyInjection();
 
-            services.AddDbContext<UserContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            ConfigureStorage(services);
 
             var assembly = AppDomain.CurrentDomain.Load("Domain");
             services.AddMediatR(assembly);
-            services.AddAutoMapper(typeof(Profile));
+            services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(typeof(Startup));
             services.AddValidatorsFromAssembly(assembly);
             services.AddLogging(Configuration);
+        }
+
+        public virtual void ConfigureStorage(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddDbContext<UserContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -54,7 +58,7 @@ namespace BaseApi
 
             app.UseAuthorization();
 
-            app.UseExceptionHandler(ExceptionMiddleware.UseCustomErrors);
+            app.UseExceptionHandler(ExceptionMiddleware.Handler);
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
