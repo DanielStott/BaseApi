@@ -1,3 +1,5 @@
+using BaseApi.Configuration.Middleware;
+
 namespace BaseApi
 {
     using System;
@@ -51,6 +53,8 @@ namespace BaseApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseExceptionHandler(ExceptionMiddleware.UseCustomErrors);
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
