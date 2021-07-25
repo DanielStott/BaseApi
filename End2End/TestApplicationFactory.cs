@@ -13,9 +13,5 @@
                 .CreateDefaultBuilder()
                 .UseStartup<TStartup>();
         }
-
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
-        {
-        }
     }
 }

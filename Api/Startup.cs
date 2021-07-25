@@ -26,7 +26,7 @@ namespace Api
         {
             services
                 .AddControllers()
-                .AddApplicationPart(typeof(UsersController).Assembly);
+                .AddApplicationPart(AppDomain.CurrentDomain.Load("Api"));
             services.AddDependencyInjection();
 
             ConfigureStorage(services);
