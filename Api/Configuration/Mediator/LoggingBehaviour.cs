@@ -1,4 +1,4 @@
-﻿namespace BaseApi.Configuration.Mediator
+﻿namespace Api.Configuration.Mediator
 {
     using System.Collections.Generic;
     using System.Reflection;

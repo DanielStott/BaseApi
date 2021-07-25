@@ -39,5 +39,10 @@
         {
             return await _context.Add(entity);
         }
+
+        public async Task<IEnumerable<User>> AddRange(IEnumerable<User> entities)
+        {
+            return await _context.AddRange(entities);
+        }
     }
 }
