@@ -2,8 +2,8 @@
 {
     public interface ICustomException
     {
-        string Title { get; set; }
-        int StatusCode { get; set; }
-        string Details { get; set; }
+        string Title { get; }
+        int StatusCode { get; }
+        string Details { get; }
     }
 }

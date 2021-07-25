@@ -15,6 +15,7 @@
         public UserContext(DbContextOptions<UserContext> options)
             : base(options)
         {
+            Entities = Users.AsQueryable();
         }
 
         public void BuildTable()

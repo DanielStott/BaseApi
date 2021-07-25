@@ -71,7 +71,7 @@
                 Title = exception.Title,
                 Status = exception.StatusCode,
                 Detail = exception.Details,
-                Type = exception.GetType().ToString(),
+                Type = exception.GetType().Name,
             };
 
             return problem;
@@ -84,7 +84,7 @@
                 Title = "Validation Error has occured.",
                 Status = StatusCodes.Status400BadRequest,
                 Detail = exception.Message,
-                Type = exception.GetType().ToString(),
+                Type = exception.GetType().Name,
             };
 
             foreach (var error in exception.Errors)
