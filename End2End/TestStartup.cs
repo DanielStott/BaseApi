@@ -1,4 +1,6 @@
-﻿namespace End2End
+﻿using Lamar;
+
+namespace End2End
 {
     using Api;
     using Data;
@@ -19,12 +21,12 @@
             _connection.Open();
         }
 
-        public override void ConfigureServices(IServiceCollection serviceCollection)
+        public override void ConfigureContainer(ServiceRegistry serviceCollection)
         {
             ConfigureStorage(serviceCollection);
             ConfigureDependencies(serviceCollection);
 
-            base.ConfigureServices(serviceCollection);
+            base.ConfigureContainer(serviceCollection);
         }
 
         private void ConfigureDependencies(IServiceCollection serviceCollection)

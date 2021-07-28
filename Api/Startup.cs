@@ -1,3 +1,5 @@
+using Lamar;
+
 namespace Api
 {
     using System;
@@ -22,7 +24,7 @@ namespace Api
             Configuration = configuration;
         }
 
-        public virtual void ConfigureServices(IServiceCollection services)
+        public virtual void ConfigureContainer(ServiceRegistry services)
         {
             services
                 .AddControllers()

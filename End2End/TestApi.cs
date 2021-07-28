@@ -1,4 +1,6 @@
-﻿namespace End2End
+﻿using Api;
+
+namespace End2End
 {
     using System.Net;
     using System.Net.Http;
@@ -21,6 +23,8 @@
         public void Setup()
         {
             TestApplicationFactory = new TestApplicationFactory<TestStartup>();
+
+            // TODO: The factory throws a null exception on construction still, needs fixing.
             Client = TestApplicationFactory.CreateClient();
             LinkGenerator = GetService<LinkGenerator>();
             var seeder = GetService<Seeder>();
