@@ -1,3 +1,5 @@
+using Lamar.Microsoft.DependencyInjection;
+
 namespace Api
 {
     using Microsoft.AspNetCore.Hosting;
@@ -14,6 +16,7 @@ namespace Api
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
+                .UseLamar()
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }
