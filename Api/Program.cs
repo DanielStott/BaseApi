@@ -1,7 +1,6 @@
-using Lamar.Microsoft.DependencyInjection;
-
 namespace Api
 {
+    using Lamar.Microsoft.DependencyInjection;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
     using Serilog;

@@ -1,5 +1,6 @@
 ﻿namespace End2End
 {
+    using Lamar;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
     using Microsoft.Extensions.Hosting;

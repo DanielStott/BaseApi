@@ -1,6 +1,4 @@
-﻿using Api;
-
-namespace End2End
+﻿namespace End2End
 {
     using System.Net;
     using System.Net.Http;
@@ -25,10 +23,18 @@ namespace End2End
             TestApplicationFactory = new TestApplicationFactory<TestStartup>();
 
             // TODO: The factory throws a null exception on construction still, needs fixing.
+            // ' Unable to cast object of type 'Microsoft.Extensions.DependencyInjection.ServiceCollection' to type 'Lamar.ServiceRegistry''
             Client = TestApplicationFactory.CreateClient();
             LinkGenerator = GetService<LinkGenerator>();
             var seeder = GetService<Seeder>();
             seeder.Seed();
+        }
+
+        [OneTimeTearDown]
+        public static void Kill()
+        {
+            Client.Dispose();
+            TestApplicationFactory.Dispose();
         }
 
         public static async Task<(T, HttpStatusCode)> Get<T>(string endpointName, object urlValues = null)

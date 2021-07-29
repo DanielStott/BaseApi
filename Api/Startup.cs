@@ -24,26 +24,26 @@ namespace Api
             Configuration = configuration;
         }
 
-        public virtual void ConfigureContainer(ServiceRegistry services)
+        public virtual void ConfigureContainer(ServiceRegistry serviceRegistry)
         {
-            services
+            serviceRegistry
                 .AddControllers()
                 .AddApplicationPart(AppDomain.CurrentDomain.Load("Api"));
-            services.AddDependencyInjection();
+            serviceRegistry.AddDependencyInjection();
 
-            ConfigureStorage(services);
+            ConfigureStorage(serviceRegistry);
 
             var assembly = AppDomain.CurrentDomain.Load("Domain");
-            services.AddMediatR(assembly);
-            services.AddAutoMapper(typeof(Startup));
-            services.AddMediatR(typeof(Startup));
-            services.AddValidatorsFromAssembly(assembly);
-            services.AddLogging(Configuration);
+            serviceRegistry.AddMediatR(assembly);
+            serviceRegistry.AddAutoMapper(typeof(Startup));
+            serviceRegistry.AddMediatR(typeof(Startup));
+            serviceRegistry.AddValidatorsFromAssembly(assembly);
+            serviceRegistry.AddLogging(Configuration);
         }
 
-        public virtual void ConfigureStorage(IServiceCollection serviceCollection)
+        public virtual void ConfigureStorage(ServiceRegistry serviceRegistry)
         {
-            serviceCollection.AddDbContext<UserContext>(options =>
+            serviceRegistry.AddDbContext<UserContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
         }
 

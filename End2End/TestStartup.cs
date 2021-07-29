@@ -1,9 +1,8 @@
-﻿using Lamar;
-
-namespace End2End
+﻿namespace End2End
 {
     using Api;
     using Data;
+    using Lamar;
     using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -21,26 +20,26 @@ namespace End2End
             _connection.Open();
         }
 
-        public override void ConfigureContainer(ServiceRegistry serviceCollection)
+        public override void ConfigureContainer(ServiceRegistry serviceRegistry)
         {
-            ConfigureStorage(serviceCollection);
-            ConfigureDependencies(serviceCollection);
+            ConfigureStorage(serviceRegistry);
+            ConfigureDependencies(serviceRegistry);
 
-            base.ConfigureContainer(serviceCollection);
+            base.ConfigureContainer(serviceRegistry);
         }
 
-        private void ConfigureDependencies(IServiceCollection serviceCollection)
+        public override void ConfigureStorage(ServiceRegistry serviceRegistry)
         {
-            serviceCollection.AddSingleton<Seeder>();
-        }
-
-        public override void ConfigureStorage(IServiceCollection serviceCollection)
-        {
-            serviceCollection
+            serviceRegistry
                 .AddDbContext<UserContext>(options =>
                 {
                     options.UseSqlite(_connection);
                 });
+        }
+
+        private void ConfigureDependencies(ServiceRegistry serviceRegistry)
+        {
+            serviceRegistry.AddSingleton<Seeder>();
         }
     }
 }
