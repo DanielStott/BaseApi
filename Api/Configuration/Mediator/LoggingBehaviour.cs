@@ -8,7 +8,7 @@
     using MediatR;
     using Microsoft.Extensions.Logging;
 
-    public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<LoggingBehaviour<TRequest, TResponse>> _logger;
         public LoggingBehaviour(ILogger<LoggingBehaviour<TRequest, TResponse>> logger)

@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <LangVersion>latestmajor</LangVersion>
         <CodeAnalysisRuleSet>$(solutiondir)/stylecop.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.8" />
-      <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.8" />
-      <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.8" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.8" />
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.2" />
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.2" />
+      <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.2" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
       <PackageReference Include="NUnit" Version="3.13.2" />
-      <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+      <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
       <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
