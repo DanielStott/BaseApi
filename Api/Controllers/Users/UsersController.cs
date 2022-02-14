@@ -19,7 +19,7 @@
             _mapper = mapper;
         }
 
-        [HttpPost("", Name = nameof(Create))]
+        [HttpPost(Name = nameof(Create))]
         public async Task<ActionResult<UserViewModel>> Create(CreateUser.Command command)
         {
             var user = await _mediator.Send(command);
