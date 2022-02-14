@@ -1,10 +1,9 @@
-﻿using Domain.Shared.Exceptions;
-
-namespace Domain.Users.Handlers
+﻿namespace Domain.Users.Handlers
 {
     using System.Threading;
     using System.Threading.Tasks;
     using Domain.Shared.Attributes;
+    using Domain.Shared.Exceptions;
     using Domain.Users.Interfaces;
     using Domain.Users.Models;
     using FluentValidation;
