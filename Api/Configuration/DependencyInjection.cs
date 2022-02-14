@@ -12,10 +12,9 @@
 
     public static class DependencyInjection
     {
-         public static void AddDependencyInjection(this IServiceCollection services)
+        public static void AddDependencyInjection(this IServiceCollection services)
         {
             services.TryAddScoped<IContext<User>, UserContext>();
-            services.TryAddScoped<IUserRepository, UserRepository>();
             services.TryAddScoped<IUserRepository, UserRepository>();
             services.TryAddScoped<LinkGenerator>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));

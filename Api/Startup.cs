@@ -34,7 +34,6 @@ namespace Api
             var assembly = AppDomain.CurrentDomain.Load("Domain");
             services.AddMediatR(assembly);
             services.AddAutoMapper(typeof(Startup));
-            services.AddMediatR(typeof(Startup));
             services.AddValidatorsFromAssembly(assembly);
             services.AddLogging(Configuration);
         }
