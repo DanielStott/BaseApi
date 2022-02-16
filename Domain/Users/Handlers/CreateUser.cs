@@ -2,10 +2,10 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Domain.Shared.Attributes;
-    using Domain.Shared.Exceptions;
-    using Domain.Users.Interfaces;
-    using Domain.Users.Models;
+    using Shared.Attributes;
+    using Shared.Exceptions;
+    using Interfaces;
+    using Models;
     using FluentValidation;
     using MediatR;
 
@@ -53,27 +53,27 @@
                 _userRepository = userRepository;
             }
 
-            public async Task<User> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<User> Handle(Command command, CancellationToken cancellationToken)
             {
-                await ValidateRequest(request);
+                await ValidateRequest(command);
 
-                var user = User.Create(request.Username, request.Email, request.Password, request.FirstName, request.LastName);
+                var user = User.Create(command.Username, command.Email, command.Password, command.FirstName, command.LastName);
 
                 var createdUser = await _userRepository.Add(user);
 
                 return createdUser;
             }
 
-            private async Task ValidateRequest(Command request)
+            private async Task ValidateRequest(Command command)
             {
-                var userAlreadyExists = await _userRepository.GetByEmailOrUsername(request.Email, request.Username);
+                var user = await _userRepository.GetByEmailOrUsername(command.Email, command.Username);
 
-                if (userAlreadyExists is not null)
+                if (user is not null)
                 {
-                    if (userAlreadyExists.Username == request.Username)
-                        throw new AlreadyExistsExceptions(nameof(request.Username));
+                    if (user.Username == command.Username)
+                        throw new AlreadyExistsExceptions(nameof(command.Username));
 
-                    throw new AlreadyExistsExceptions(nameof(request.Email));
+                    throw new AlreadyExistsExceptions(nameof(command.Email));
                 }
             }
         }
