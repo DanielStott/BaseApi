@@ -10,7 +10,6 @@
         public string Password { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        public Guid Id { get; private set; }
 
         public static User Create(string username, string email, string password, string firstName, string lastName)
             => new ()
@@ -21,15 +20,5 @@
                 FirstName = firstName,
                 LastName = lastName,
             };
-
-
-        public static User GetUser(Guid id)
-            => new()
-            {
-                Id = id,
-            };
-
-
-
     }
 }
