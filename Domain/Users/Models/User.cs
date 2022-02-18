@@ -1,6 +1,5 @@
 ﻿namespace Domain.Users.Models
 {
-    using System;
     using Domain.Shared.Models;
 
     public class User : Entity
