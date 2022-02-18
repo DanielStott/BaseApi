@@ -1,5 +1,6 @@
 ﻿namespace Api.Controllers.Users
 {
+    using System;
     using System.Threading.Tasks;
     using AutoMapper;
     using Domain.Users.Handlers;
@@ -25,6 +26,15 @@
             var user = await _mediator.Send(command);
             var viewModel = _mapper.Map<UserViewModel>(user);
 
+            return Ok(viewModel);
+        }
+
+        [HttpGet("{userId:guid}")]
+        public async Task<ActionResult<UserViewModel>> Get(Guid userId)
+        {
+            GetUser.Query query = new GetUser.Query(userId);
+            var user = await _mediator.Send(query);
+            var viewModel = _mapper.Map<UserViewModel>(user);
             return Ok(viewModel);
         }
     }
