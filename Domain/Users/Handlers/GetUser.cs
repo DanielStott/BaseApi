@@ -3,11 +3,8 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Shared.Attributes;
-    using Shared.Exceptions;
     using Interfaces;
     using Models;
-    using FluentValidation;
     using MediatR;
 
     public class GetUser
@@ -32,8 +29,6 @@
 
             public async Task<User> Handle(Query request, CancellationToken cancellationToken)
             {
-                var user = User.GetUser(request.UserId);
-
                 var createdUser = await _userRepository.GetById(request.UserId);
 
                 return createdUser;
