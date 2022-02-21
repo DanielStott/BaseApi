@@ -1,14 +1,13 @@
-﻿namespace Domain.Shared.Interfaces
-{
-    using System;
+﻿using System;
 
-    public interface IEntity
-    {
-        Guid Id { get; }
-        Guid CreatedBy { get; }
-        DateTime CreatedOn { get; }
-        Guid LastModifiedBy { get; }
-        DateTime LastModifiedOn { get; }
-        bool Deleted { get; }
-    }
+namespace Domain.Shared.Interfaces;
+
+public interface IEntity
+{
+    Guid Id { get; }
+    Guid CreatedBy { get; }
+    DateTime CreatedOn { get; }
+    Guid LastModifiedBy { get; }
+    DateTime LastModifiedOn { get; }
+    bool Deleted { get; }
 }

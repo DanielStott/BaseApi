@@ -1,10 +1,9 @@
-﻿namespace Api.Controllers.Users
-{
-    using System;
+﻿using System;
 
-    public class UserViewModel
-    {
-        public Guid Id { get; set; }
-        public string Email { get; set; }
-    }
+namespace Api.Controllers.Users;
+
+public class UserViewModel
+{
+    public Guid Id { get; set; }
+    public string Email { get; set; }
 }

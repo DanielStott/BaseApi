@@ -1,9 +1,8 @@
-﻿namespace Data
-{
-    using Domain.Users.Models;
+﻿using Domain.Users.Models;
 
-    public interface ITestSuite
-    {
-        ITestData<User> Users { get; init; }
-    }
+namespace Data;
+
+public interface ITestSuite
+{
+    ITestData<User> Users { get; init; }
 }

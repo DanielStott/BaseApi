@@ -2,7 +2,6 @@
 using Api.Controllers.Users;
 using Domain.Users.Handlers;
 using NUnit.Framework;
-using Test.Configuration;
 
 namespace Test.E2E.Users;
 

@@ -1,9 +1,8 @@
-﻿namespace Domain.Shared.Interfaces
+﻿namespace Domain.Shared.Interfaces;
+
+public interface ICustomException
 {
-    public interface ICustomException
-    {
-        string Title { get; }
-        int StatusCode { get; }
-        string Details { get; }
-    }
+    string Title { get; }
+    int StatusCode { get; }
+    string Details { get; }
 }
