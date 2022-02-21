@@ -30,17 +30,4 @@ public class UserTests
             Assert.IsNotNull(user.Id);
         });
     }
-
-    [Test]
-    public async Task successfully_get_user()
-    {
-        var (user, httpResponseCode) = await TestApi.Get<UserViewModel>(nameof(UsersController.Get), "userId", Data.Users.Morty.Id);
-
-        Assert.Multiple(() =>
-        {
-            Assert.AreEqual(HttpStatusCode.OK, httpResponseCode);
-            Assert.AreEqual( Data.Users.Morty.Email, user.Email);
-            Assert.IsNotNull(user.Id);
-        });
-    }
 }
