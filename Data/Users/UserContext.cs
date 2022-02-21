@@ -1,46 +1,45 @@
-﻿namespace Storage.Users
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Domain.Shared.Interfaces;
+using Domain.Users.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace Storage.Users;
+
+public class UserContext : DbContext, IContext<User>
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Domain.Shared.Interfaces;
-    using Domain.Users.Models;
-    using Microsoft.EntityFrameworkCore;
+    private DbSet<User> Users { get; set; }
+    public IQueryable<User> Entities { get; set; }
 
-    public class UserContext : DbContext, IContext<User>
+    public UserContext(DbContextOptions<UserContext> options)
+        : base(options)
     {
-        private DbSet<User> Users { get; set; }
-        public IQueryable<User> Entities { get; set; }
+        Entities = Users.AsQueryable();
+    }
 
-        public UserContext(DbContextOptions<UserContext> options)
-            : base(options)
-        {
-            Entities = Users.AsQueryable();
-        }
+    public void BuildTable()
+    {
+        Database.EnsureCreatedAsync();
+    }
 
-        public void BuildTable()
-        {
-            Database.EnsureCreatedAsync();
-        }
+    public async Task<User> Add(User entity)
+    {
+        var user = (await Users.AddAsync(entity)).Entity;
+        await SaveChangesAsync();
+        return user;
+    }
 
-        public async Task<User> Add(User entity)
-        {
-            var user = (await Users.AddAsync(entity)).Entity;
-            await SaveChangesAsync();
-            return user;
-        }
+    public async Task<IEnumerable<User>> AddRange(IEnumerable<User> entities)
+    {
+        await Users.AddRangeAsync(entities);
+        await SaveChangesAsync();
+        return entities;
+    }
 
-        public async Task<IEnumerable<User>> AddRange(IEnumerable<User> entities)
-        {
-            await Users.AddRangeAsync(entities);
-            await SaveChangesAsync();
-            return entities;
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new UserDbConfiguration());
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfiguration(new UserDbConfiguration());
     }
 }

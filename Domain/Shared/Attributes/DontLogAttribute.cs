@@ -1,9 +1,8 @@
-﻿namespace Domain.Shared.Attributes
-{
-    using System;
+﻿using System;
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class DontLogAttribute : Attribute
-    {
-    }
+namespace Domain.Shared.Attributes;
+
+[AttributeUsage(AttributeTargets.Property)]
+public class DontLogAttribute : Attribute
+{
 }

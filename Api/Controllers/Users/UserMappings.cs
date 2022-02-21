@@ -1,13 +1,12 @@
-﻿namespace Api.Controllers.Users
-{
-    using AutoMapper;
-    using Domain.Users.Models;
+﻿using AutoMapper;
+using Domain.Users.Models;
 
-    public class UserMappings : Profile
+namespace Api.Controllers.Users;
+
+public class UserMappings : Profile
+{
+    public UserMappings()
     {
-        public UserMappings()
-        {
-            CreateMap<User, UserViewModel>();
-        }
+        CreateMap<User, UserViewModel>();
     }
 }

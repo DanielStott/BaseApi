@@ -1,9 +1,8 @@
-﻿namespace Data
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-    public interface ITestData<T> where T : class
-    {
-        IEnumerable<T> All { get; set; }
-    }
+namespace Data;
+
+public interface ITestData<T> where T : class
+{
+    IEnumerable<T> All { get; set; }
 }

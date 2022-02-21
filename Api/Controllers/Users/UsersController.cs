@@ -1,41 +1,40 @@
-﻿namespace Api.Controllers.Users
+﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
+using Domain.Users.Handlers;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Api.Controllers.Users;
+
+[ApiController]
+[Route("[controller]")]
+public class UsersController : ControllerBase
 {
-    using System;
-    using System.Threading.Tasks;
-    using AutoMapper;
-    using Domain.Users.Handlers;
-    using MediatR;
-    using Microsoft.AspNetCore.Mvc;
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    [ApiController]
-    [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public UsersController(IMediator mediator, IMapper mapper)
     {
-        private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
+        _mediator = mediator;
+        _mapper = mapper;
+    }
 
-        public UsersController(IMediator mediator, IMapper mapper)
-        {
-            _mediator = mediator;
-            _mapper = mapper;
-        }
+    [HttpPost("Create", Name = nameof(Create))]
+    public async Task<ActionResult<UserViewModel>> Create(CreateUser.Command command)
+    {
+        var user = await _mediator.Send(command);
+        var viewModel = _mapper.Map<UserViewModel>(user);
 
-        [HttpPost("Create", Name = nameof(Create))]
-        public async Task<ActionResult<UserViewModel>> Create(CreateUser.Command command)
-        {
-            var user = await _mediator.Send(command);
-            var viewModel = _mapper.Map<UserViewModel>(user);
+        return Ok(viewModel);
+    }
 
-            return Ok(viewModel);
-        }
-
-        [HttpGet("{userId:guid}")]
-        public async Task<ActionResult<UserViewModel>> Get(Guid userId)
-        {
-            GetUser.Query query = new GetUser.Query(userId);
-            var user = await _mediator.Send(query);
-            var viewModel = _mapper.Map<UserViewModel>(user);
-            return Ok(viewModel);
-        }
+    [HttpGet("{userId:guid}")]
+    public async Task<ActionResult<UserViewModel>> Get(Guid userId)
+    {
+        GetUser.Query query = new GetUser.Query(userId);
+        var user = await _mediator.Send(query);
+        var viewModel = _mapper.Map<UserViewModel>(user);
+        return Ok(viewModel);
     }
 }
