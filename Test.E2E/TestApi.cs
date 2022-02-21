@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -34,14 +36,33 @@ public class TestApi
         return await httpMessage.GetResponse<T>();
     }
 
-    public static Task<TResponse> Post<TRequest, TResponse>(string endpointName, TRequest request)
+    public static async Task<(T, HttpStatusCode)> Get<T>(string endpointName, Guid id)
+        => await Get<T>(endpointName, new { Id = id });
+
+    public static async Task<(T, HttpStatusCode)> Get<T>(string endpointName, string paramName, Guid id)
+    {
+        var paramDict = new Dictionary<string, object>
+        {
+            [paramName] = id,
+        };
+        return await Get<T>(endpointName, paramDict);
+    }
+
+    public static async Task<(T, HttpStatusCode)> Get<T>(string endpointName, Dictionary<string, object> paramDict)
+    {
+        var url = GetUrl(endpointName, paramDict);
+        var httpMessage = await Client.GetAsync(url);
+        return await httpMessage.GetResponse<T>();
+    }
+
+    public static Task<(TResponse, HttpStatusCode)> Post<TRequest, TResponse>(string endpointName, TRequest request)
         => Post<TRequest, TResponse>(endpointName, request, null);
 
-    public static async Task<TResponse> Post<TRequest, TResponse>(string endpointName, TRequest request, object urlValues)
+    public static async Task<(TResponse, HttpStatusCode)> Post<TRequest, TResponse>(string endpointName, TRequest request, object urlValues)
     {
         var url = GetUrl(endpointName, urlValues);
         var response = await Client.PostAsJsonAsync(url, request);
-        return await response.Content.ReadFromJsonAsync<TResponse>();
+        return await response.GetResponse<TResponse>();
     }
 
     private static string GetUrl(string endpointName, object values)

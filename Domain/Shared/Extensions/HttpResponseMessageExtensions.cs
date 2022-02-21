@@ -8,8 +8,5 @@ namespace Domain.Shared.Extensions;
 public static class HttpResponseMessageExtensions
 {
     public static async Task<(T, HttpStatusCode)> GetResponse<T>(this HttpResponseMessage message)
-    {
-        message.EnsureSuccessStatusCode();
-        return (await message.Content.ReadFromJsonAsync<T>(), message.StatusCode);
-    }
+        => (await message.Content.ReadFromJsonAsync<T>(), message.StatusCode);
 }

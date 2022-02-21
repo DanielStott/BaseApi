@@ -29,7 +29,7 @@ public class UsersController : ControllerBase
         return Ok(viewModel);
     }
 
-    [HttpGet("{userId:guid}")]
+    [HttpGet("{userId:guid}", Name = nameof(Get))]
     public async Task<ActionResult<UserViewModel>> Get(Guid userId)
     {
         GetUser.Query query = new GetUser.Query(userId);
