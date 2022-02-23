@@ -10,4 +10,5 @@ public interface IContext<T> where T : class
     void BuildTable();
     Task<T> Add(T entity);
     Task<IEnumerable<T>> AddRange(IEnumerable<T> entities);
+    Task<T> Update(T entity);
 }
