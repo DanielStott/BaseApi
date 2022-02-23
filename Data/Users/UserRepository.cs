@@ -50,4 +50,9 @@ public class UserRepository : IUserRepository
     {
         return await _context.AddRange(entities);
     }
+
+    public async Task<User> Update(User entity)
+    {
+        return await _context.Update(entity);
+    }
 }

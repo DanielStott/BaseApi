@@ -37,6 +37,13 @@ public class UserContext : DbContext, IContext<User>
         return entities;
     }
 
+    public async Task<User> Update(User entity)
+    {
+        var user = Users.Update(entity).Entity;
+        await SaveChangesAsync();
+        return user;
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

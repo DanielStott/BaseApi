@@ -11,4 +11,5 @@ public interface IRepository<T> where T : class
     Task<IEnumerable<T>> GetAll();
     Task<T> Add(T entity);
     Task<IEnumerable<T>> AddRange(IEnumerable<T> entities);
+    Task<T> Update(T entity);
 }
