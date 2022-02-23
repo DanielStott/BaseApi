@@ -15,18 +15,20 @@ namespace Test.E2E;
 [SetUpFixture]
 public class TestApi
 {
-    public static TestApplicationFactory<TestStartup> TestApplicationFactory { get; private set; }
+    private static TestApplication _testApplication;
     public static HttpClient Client { get; private set; }
+    public static IServiceProvider Services { get; private set; }
     private static LinkGenerator LinkGenerator { get; set; }
 
     [OneTimeSetUp]
-    public void Setup()
+    public async Task Setup()
     {
-        TestApplicationFactory = new TestApplicationFactory<TestStartup>();
-        Client = TestApplicationFactory.CreateClient();
+        _testApplication = new TestApplication();
+        Client = _testApplication.CreateClient();
+        Services = _testApplication.Services;
         LinkGenerator = GetService<LinkGenerator>();
-        var seeder = GetService<Seeder>();
-        seeder.Seed();
+        var seeder = _testApplication.Services.GetService<Seeder>();
+        await seeder.Seed();
     }
 
     public static async Task<(T, HttpStatusCode)> Get<T>(string endpointName, object urlValues = null)
@@ -69,5 +71,5 @@ public class TestApi
         => $"http://localhost{LinkGenerator.GetPathByName(endpointName, values)}";
 
     public static T GetService<T>()
-        => TestApplicationFactory.Services.GetService<T>();
+        => Services.GetService<T>();
 }

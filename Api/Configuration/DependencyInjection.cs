@@ -3,8 +3,6 @@ using Domain.Shared.Interfaces;
 using Domain.Users.Interfaces;
 using Domain.Users.Models;
 using MediatR;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Storage.Users;
 
