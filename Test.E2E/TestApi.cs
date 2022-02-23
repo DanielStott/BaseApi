@@ -8,6 +8,7 @@ using Domain.Shared.Extensions;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using Storage.Users;
 using Test.Configuration;
 
 namespace Test.E2E;
@@ -17,7 +18,6 @@ public class TestApi
 {
     private static TestApplication _testApplication;
     public static HttpClient Client { get; private set; }
-    public static IServiceProvider Services { get; private set; }
     private static LinkGenerator LinkGenerator { get; set; }
 
     [OneTimeSetUp]
@@ -25,9 +25,9 @@ public class TestApi
     {
         _testApplication = new TestApplication();
         Client = _testApplication.CreateClient();
-        Services = _testApplication.Services;
         LinkGenerator = GetService<LinkGenerator>();
-        var seeder = _testApplication.Services.GetService<Seeder>();
+        var userContext = GetService<UserContext>();
+        var seeder = GetService<Seeder>();
         await seeder.Seed();
     }
 
@@ -71,5 +71,5 @@ public class TestApi
         => $"http://localhost{LinkGenerator.GetPathByName(endpointName, values)}";
 
     public static T GetService<T>()
-        => Services.GetService<T>();
+        => _testApplication.Services.GetService<T>();
 }

@@ -11,7 +11,7 @@ public static class TestConfiguration
 {
     public static void TestServices(IServiceCollection services)
     {
-        services.AddSingleton<Seeder>();
+        services.AddScoped<Seeder>();
     }
     
     public static void TestStorage(IServiceCollection services)
