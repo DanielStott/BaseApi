@@ -1,22 +1,14 @@
 using Api.Configuration;
 
-namespace Api;
+var builder = WebApplication
+    .CreateBuilder(args);
 
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        var builder = WebApplication
-            .CreateBuilder(args);
+builder
+    .ConfigureServices()
+    .ConfigureHost()
+    .ConfigureStorage();
 
-        builder
-            .ConfigureServices()
-            .ConfigureHost()
-            .ConfigureStorage();
+var app = builder.Build();
 
-        var app = builder.Build();
-
-        app.ConfigureApplication();
-        app.Run();
-    }
-}
+app.ConfigureApplication();
+app.Run();

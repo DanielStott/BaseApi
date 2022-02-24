@@ -26,4 +26,8 @@
       <ProjectReference Include="..\Test.Data\Test.Data.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="Test.E2E" />
+    </ItemGroup>
+
 </Project>

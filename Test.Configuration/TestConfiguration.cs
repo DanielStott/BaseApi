@@ -17,7 +17,7 @@ public static class TestConfiguration
     public static void TestStorage(IServiceCollection services)
     {
         services.RemoveAll(typeof(DbContextOptions<UserContext>));
-
+        
         services.AddDbContext<UserContext>(options =>
             options.UseInMemoryDatabase("TestDb", new InMemoryDatabaseRoot())); 
     }
