@@ -4,7 +4,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>latestmajor</LangVersion>
         <CodeAnalysisRuleSet>$(solutiondir)/stylecop.ruleset</CodeAnalysisRuleSet>
+        <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Test.E2E" />
+        <InternalsVisibleTo Include="Test.Configuration" />
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="11.0.1" />
@@ -28,7 +34,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain\Domain.csproj" />
-      <ProjectReference Include="..\Data\Data.csproj" />
+      <ProjectReference Include="..\Storage\Storage.csproj" />
     </ItemGroup>
 
 

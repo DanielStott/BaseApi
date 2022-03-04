@@ -5,9 +5,13 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Domain.Shared.Extensions;
+using Domain.Shared.Interfaces;
+using Domain.Users.Interfaces;
+using Domain.Users.Models;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using Storage.Users;
 using Test.Configuration;
 
 namespace Test.E2E;
@@ -15,24 +19,19 @@ namespace Test.E2E;
 [SetUpFixture]
 public class TestApi
 {
-    public static TestApplicationFactory<TestStartup> TestApplicationFactory { get; private set; }
-    public static HttpClient Client { get; private set; }
-    private static LinkGenerator LinkGenerator { get; set; }
+    private static TestApplication _testApplication;
 
     [OneTimeSetUp]
-    public void Setup()
+    public async Task Setup()
     {
-        TestApplicationFactory = new TestApplicationFactory<TestStartup>();
-        Client = TestApplicationFactory.CreateClient();
-        LinkGenerator = GetService<LinkGenerator>();
-        var seeder = GetService<Seeder>();
-        seeder.Seed();
+        _testApplication = new TestApplication();
+        await _testApplication.SeedTestData();
     }
 
     public static async Task<(T, HttpStatusCode)> Get<T>(string endpointName, object urlValues = null)
     {
         var url = GetUrl(endpointName, urlValues);
-        var httpMessage = await Client.GetAsync(url);
+        var httpMessage = await _testApplication.Client.GetAsync(url);
         return await httpMessage.GetResponse<T>();
     }
 
@@ -51,7 +50,7 @@ public class TestApi
     public static async Task<(T, HttpStatusCode)> Get<T>(string endpointName, Dictionary<string, object> paramDict)
     {
         var url = GetUrl(endpointName, paramDict);
-        var httpMessage = await Client.GetAsync(url);
+        var httpMessage = await _testApplication.Client.GetAsync(url);
         return await httpMessage.GetResponse<T>();
     }
 
@@ -61,13 +60,10 @@ public class TestApi
     public static async Task<(TResponse, HttpStatusCode)> Post<TRequest, TResponse>(string endpointName, TRequest request, object urlValues)
     {
         var url = GetUrl(endpointName, urlValues);
-        var response = await Client.PostAsJsonAsync(url, request);
+        var response = await _testApplication.Client.PostAsJsonAsync(url, request);
         return await response.GetResponse<TResponse>();
     }
 
     private static string GetUrl(string endpointName, object values)
-        => $"http://localhost{LinkGenerator.GetPathByName(endpointName, values)}";
-
-    public static T GetService<T>()
-        => TestApplicationFactory.Services.GetService<T>();
+        => $"http://localhost{_testApplication.LinkGenerator.GetPathByName(endpointName, values)}";
 }

@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System.Threading.Tasks;
+using Data;
 using Domain.Shared.Interfaces;
 using Domain.Users.Handlers;
 using Domain.Users.Models;
@@ -10,7 +11,7 @@ public class Seeder
 {
     private readonly IMediator _mediator;
     private readonly IContext<User> _userContext;
-
+    
     public Seeder(IMediator mediator, IContext<User> userContext)
     {
         _mediator = mediator;

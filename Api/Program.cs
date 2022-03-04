@@ -1,18 +1,14 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Serilog;
+using Api.Configuration;
 
-namespace Api;
+var builder = WebApplication
+    .CreateBuilder(args);
 
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        CreateHostBuilder(args).Build().Run();
-    }
+builder
+    .ConfigureServices()
+    .ConfigureHost()
+    .ConfigureStorage();
 
-    private static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .UseSerilog()
-            .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
-}
+var app = builder.Build();
+
+app.ConfigureApplication();
+app.Run();

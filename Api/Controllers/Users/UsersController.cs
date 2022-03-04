@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Users.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
