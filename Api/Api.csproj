@@ -34,7 +34,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain\Domain.csproj" />
-      <ProjectReference Include="..\Data\Data.csproj" />
+      <ProjectReference Include="..\Storage\Storage.csproj" />
     </ItemGroup>
 
 
