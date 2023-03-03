@@ -27,10 +27,10 @@ public class UsersController : ControllerBase
         return Ok(viewModel);
     }
 
-    [HttpGet("{userId:guid}", Name = nameof(Get))]
-    public async Task<ActionResult<UserViewModel>> Get(Guid userId)
+    [HttpGet("{id:guid}", Name = nameof(Get))]
+    public async Task<ActionResult<UserViewModel>> Get(Guid id)
     {
-        GetUser.Query query = new GetUser.Query(userId);
+        GetUser.Query query = new GetUser.Query(id);
         var user = await _mediator.Send(query);
         var viewModel = _mapper.Map<UserViewModel>(user);
         return Ok(viewModel);
