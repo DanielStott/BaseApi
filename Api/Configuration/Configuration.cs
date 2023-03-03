@@ -1,4 +1,5 @@
-﻿using Api.Configuration.Middleware;
+﻿using System.Reflection;
+using Api.Configuration.Middleware;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,7 @@ public static class Configuration
         services.AddDependencyInjection();
 
         var assembly = AppDomain.CurrentDomain.Load("Domain");
-        services.AddMediatR(assembly);
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
         services.AddAutoMapper(typeof(Program));
         services.AddValidatorsFromAssembly(assembly);
         services.AddLogging(configuration);

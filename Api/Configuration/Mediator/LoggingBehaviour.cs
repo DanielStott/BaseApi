@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using Domain.Shared.Attributes;
 using MediatR;
-using Microsoft.Extensions.Logging;
 
 namespace Api.Configuration.Mediator;
 
@@ -16,7 +12,7 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
         _logger = logger;
     }
 
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Handling {NameOfRequest}");
         var myType = request.GetType();
