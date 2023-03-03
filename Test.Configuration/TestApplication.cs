@@ -15,17 +15,17 @@ internal class TestApplication : WebApplicationFactory<Program>
     {
         LinkGenerator = GetService<LinkGenerator>();
         Client = CreateClient();
-    } 
-    
+    }
+
     protected override IHost CreateHost(IHostBuilder builder)
     {
         builder
             .ConfigureServices(TestServices)
             .ConfigureServices(TestStorage);
-        
+
         return base.CreateHost(builder);
     }
-    
+
     public T GetService<T>()
     {
         var scope = Services
