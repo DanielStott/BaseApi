@@ -5,7 +5,6 @@
         <LangVersion>default</LangVersion>
         <CodeAnalysisRuleSet>$(solutiondir)/stylecop.ruleset</CodeAnalysisRuleSet>
         <RootNamespace>Data</RootNamespace>
-        <PreserveCompilationContext>true</PreserveCompilationContext>
     </PropertyGroup>
 
     <ItemGroup>

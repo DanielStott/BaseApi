@@ -6,7 +6,7 @@ using static Test.Configuration.TestConfiguration;
 
 namespace Test.Configuration;
 
-internal class TestApplication : WebApplicationFactory<Program>
+public class TestApplication : WebApplicationFactory<Program>
 {
     public HttpClient Client { get; private set; }
     public LinkGenerator LinkGenerator { get; private set; }
