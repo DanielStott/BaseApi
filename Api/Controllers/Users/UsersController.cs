@@ -28,8 +28,7 @@ public class UsersController : ControllerBase
     [HttpGet("{id:guid}", Name = nameof(Get))]
     public async Task<ActionResult<UserViewModel>> Get(Guid id)
     {
-        var query = new GetUser.Query(id);
-        var user = await _mediator.Send(query);
+        var user = await _mediator.Send(new GetUser.Query(id));
         return _mapper.Map<UserViewModel>(user);
     }
 }

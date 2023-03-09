@@ -12,14 +12,7 @@ public class UserTests
     [Test]
     public async Task successfully_create_user()
     {
-        var command = new CreateUser.Command
-        {
-            Username = "test",
-            Email = "test@test.com",
-            Password = "password",
-            FirstName = "test",
-            LastName = "test",
-        };
+        var command = new CreateUser.Command("Test", "test@test.com", "password", "Daniel", "Stott");
 
         var (user, httpResponseCode) = await TestApi.Post<CreateUser.Command, UserViewModel>(nameof(UsersController.Create), command);
 
