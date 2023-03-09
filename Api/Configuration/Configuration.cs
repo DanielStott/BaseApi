@@ -1,8 +1,7 @@
-﻿using System.Reflection;
-using Api.Configuration.Middleware;
+﻿using Api.Configuration.Middleware;
 using FluentValidation;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Storage.Users;
 
@@ -25,6 +24,7 @@ public static class Configuration
         services.AddAutoMapper(typeof(Program));
         services.AddValidatorsFromAssembly(assembly);
         services.AddLogging(configuration);
+        services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseApi", Version = "v1" }));
 
         return webApp;
     }
@@ -51,6 +51,8 @@ public static class Configuration
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "BaseApi"); });
         }
 
         app.UseHttpsRedirection();
