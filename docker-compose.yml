@@ -2,8 +2,8 @@ version: "3.3"
     
 services:
   sql:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: MSSQL 
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: SQL 
     restart: unless-stopped
     environment:
       ACCEPT_EULA: 'Y'
