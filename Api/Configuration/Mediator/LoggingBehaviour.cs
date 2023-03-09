@@ -14,7 +14,7 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Handling {NameOfRequest}");
+        _logger.LogInformation("Handling {NameOfRequest}", typeof(TRequest).Name);
         var myType = request.GetType();
         IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
 

@@ -9,8 +9,8 @@ namespace Storage.Users;
 
 public class UserContext : DbContext, IContext<User>
 {
-    private DbSet<User> Users { get; set; }
     public IQueryable<User> Entities { get; set; }
+    private DbSet<User> Users { get; set; }
 
     public UserContext(DbContextOptions<UserContext> options)
         : base(options)
