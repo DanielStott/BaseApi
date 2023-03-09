@@ -55,15 +55,15 @@ public static class Configuration
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "BaseApi"); });
         }
 
-        app.UseHttpsRedirection();
-
-        app.UseRouting();
-
-        app.UseAuthorization();
-
-        app.UseExceptionHandler(ExceptionMiddleware.Handler);
-
-        app.UseEndpoints(endpoints => endpoints.MapControllers());
+        app.Map("/api", api =>
+        {
+            api.UseRouting();
+            api.UseExceptionHandler(ExceptionMiddleware.Handler);
+            api.UseAuthentication();
+            api.UseAuthorization();
+            api.UseHttpsRedirection();
+            api.UseEndpoints(endpoints => endpoints.MapControllers());
+        });
 
         return app;
     }

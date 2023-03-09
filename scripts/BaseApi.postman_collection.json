@@ -30,7 +30,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Username\": \"Test2\",\r\n    \"Email\": \"test2@test.com\",\r\n    \"Password\":\"Test\",\r\n    \"FirstName\": \"Daniel\",\r\n    \"LastName\": \"Stott\"\r\n}",
+							"raw": "{\r\n    \"Username\": \"Test3\",\r\n    \"Email\": \"test3@test.com\",\r\n    \"Password\":\"Test\",\r\n    \"FirstName\": \"Daniel\",\r\n    \"LastName\": \"Stott\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,15 +38,16 @@
 							}
 						},
 						"url": {
-							"raw": "https:\\\\localhost:5001\\Users\\Create",
+							"raw": "https:\\\\localhost:5001\\api\\users\\create",
 							"protocol": "https",
 							"host": [
 								"localhost"
 							],
 							"port": "5001",
 							"path": [
-								"Users",
-								"Create"
+								"api",
+								"users",
+								"create"
 							]
 						}
 					},
@@ -58,14 +59,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https:\\\\localhost:5001\\Users\\{{userId}}",
+							"raw": "https:\\\\localhost:5001\\api\\users\\{{userId}}",
 							"protocol": "https",
 							"host": [
 								"localhost"
 							],
 							"port": "5001",
 							"path": [
-								"Users",
+								"api",
+								"users",
 								"{{userId}}"
 							]
 						}
