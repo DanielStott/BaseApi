@@ -68,13 +68,13 @@ public class CreateUser
         {
             var user = await _userRepository.GetByEmailOrUsername(command.Email, command.Username);
 
-            if (user is not null)
-            {
-                if (user.Username == command.Username)
-                    throw new AlreadyExistsExceptions(nameof(command.Username));
+            if (user is null)
+                return;
 
-                throw new AlreadyExistsExceptions(nameof(command.Email));
-            }
+            if (user.Username == command.Username)
+                throw new AlreadyExistsExceptions(nameof(command.Username));
+
+            throw new AlreadyExistsExceptions(nameof(command.Email));
         }
     }
 }
