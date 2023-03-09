@@ -83,7 +83,7 @@
         <Rule Id="SA1201"  Action="None" />          <!-- Elements should appear in the correct order -->
         <Rule Id="SA1202"  Action="Warning" />          <!-- Elements should be ordered by access -->
         <Rule Id="SA1203"  Action="Warning" />          <!-- Constants should appear before fields -->
-        <Rule Id="SA1204"  Action="Warning" />          <!-- Static elements should appear before instance elements -->
+        <Rule Id="SA1204"  Action="None" />          <!-- Static elements should appear before instance elements -->
         <Rule Id="SA1205"  Action="Warning" />          <!-- Partial elements should declare access -->
         <Rule Id="SA1206"  Action="Warning" />          <!-- Declaration keywords should follow order -->
         <Rule Id="SA1207"  Action="Warning" />          <!-- Protected should come before internal -->
@@ -99,7 +99,7 @@
     </Rules>
 
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.NamingRules">
-        <Rule Id="SA1300"  Action="Warning" />          <!-- Element should begin with upper-case letter -->
+        <Rule Id="SA1300"  Action="None" />          <!-- Element should begin with upper-case letter -->
         <Rule Id="SA1301"  Action="None" />             <!-- Element should begin with lower-case letter -->
         <Rule Id="SA1302"  Action="Warning" />          <!-- Interface names should begin with I -->
         <Rule Id="SA1303"  Action="Warning" />          <!-- Const field names should begin with upper-case letter -->

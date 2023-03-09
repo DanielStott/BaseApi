@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>latestmajor</LangVersion>
-        <CodeAnalysisRuleSet>$(solutiondir)/stylecop.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>../stylecop.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>

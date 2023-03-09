@@ -97,7 +97,7 @@ public static class ExceptionMiddleware
                 continue;
             }
 
-            problem.Errors[error.PropertyName] = new[] {error.ErrorMessage};
+            problem.Errors[error.PropertyName] = new[] { error.ErrorMessage };
         }
 
         return problem;
