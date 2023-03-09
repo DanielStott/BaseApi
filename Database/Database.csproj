@@ -3,15 +3,12 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
+        <LangVersion>latestmajor</LangVersion>
         <CodeAnalysisRuleSet>$(solutiondir)/stylecop.ruleset</CodeAnalysisRuleSet>
-        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
       <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,12 +18,6 @@
 
     <ItemGroup>
       <EmbeddedResource Include="Scripts\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Microsoft.Extensions.Configuration, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-        <HintPath>..\..\..\.dotnet\shared\Microsoft.AspNetCore.App\5.0.7\Microsoft.Extensions.Configuration.dll</HintPath>
-      </Reference>
     </ItemGroup>
 
     <ItemGroup>
