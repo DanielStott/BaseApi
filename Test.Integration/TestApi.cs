@@ -65,5 +65,8 @@ public class TestApi
     }
 
     private static string GetUrl(string endpointName, object values)
-        => $"http://localhost{_testApplication.LinkGenerator.GetPathByName(endpointName, values)}";
+    {
+        var url = $"http://localhost/api{_testApplication.LinkGenerator.GetPathByName(endpointName, values)}";
+        return url;
+    }
 }
