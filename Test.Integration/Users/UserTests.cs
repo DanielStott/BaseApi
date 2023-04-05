@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Api.Controllers.Users;
 using Domain.Users.Handlers;
@@ -7,33 +8,33 @@ using NUnit.Framework;
 namespace Test.Integration.Users;
 
 [TestFixture]
-public class UserTests
+public class UserTests : BaseTest
 {
     [Test]
     public async Task successfully_create_user()
     {
         var command = new CreateUser.Command("Test", "test@test.com", "password", "Daniel", "Stott");
 
-        var (user, httpResponseCode) = await TestApi.Post<CreateUser.Command, UserViewModel>(nameof(UsersController.Create), command);
+        var (response, user) = await Api.Post("/api/users/create", command);
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(httpResponseCode, HttpStatusCode.OK);
-            Assert.AreEqual(command.Email, user.Email);
-            Assert.IsNotNull(user.Id);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            Assert.That((string)user.email, Is.EqualTo(command.Email));
+            Assert.That(user.id, Is.Not.Null);
         });
     }
 
     [Test]
     public async Task successfully_get_user()
     {
-        var (user, httpResponseCode) = await TestApi.Get<UserViewModel>(nameof(UsersController.Get), new { Data.Users.Rick.Id });
+        var (response, user) = await Api.Get($"/api/users/{Data.Users.Rick.Id}");
 
         Assert.Multiple(() =>
         {
-            Assert.That(httpResponseCode, Is.EqualTo(HttpStatusCode.OK));
-            Assert.That(user.Id, Is.EqualTo(Data.Users.Rick.Id));
-            Assert.That(user.Email, Is.EqualTo(Data.Users.Rick.Email));
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            Assert.That((Guid)user.id, Is.EqualTo(Data.Users.Rick.Id));
+            Assert.That((string)user.email, Is.EqualTo(Data.Users.Rick.Email));
         });
     }
 }

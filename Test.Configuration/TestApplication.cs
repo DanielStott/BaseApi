@@ -26,6 +26,14 @@ public class TestApplication : WebApplicationFactory<Program>
         return base.CreateHost(builder);
     }
 
+    public HttpClient GetClient()
+    {
+        return CreateClient(new WebApplicationFactoryClientOptions
+        {
+            BaseAddress = new Uri("https://localhost"),
+        });
+    }
+
     public T GetService<T>()
     {
         var scope = Services
