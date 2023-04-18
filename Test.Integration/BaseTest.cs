@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Test.Integration;
 
-public class BaseTest
+public abstract class BaseTest
 {
     protected HttpClient Api { get; private set; }
 

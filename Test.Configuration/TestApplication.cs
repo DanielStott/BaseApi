@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.Routing;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using static Test.Configuration.TestConfiguration;
@@ -9,19 +9,18 @@ namespace Test.Configuration;
 public class TestApplication : WebApplicationFactory<Program>
 {
     public HttpClient Client { get; private set; }
-    public LinkGenerator LinkGenerator { get; private set; }
+    private SqliteConnection _connection;
 
-    public TestApplication()
-    {
-        LinkGenerator = GetService<LinkGenerator>();
-        Client = CreateClient();
-    }
+    public TestApplication() => Client = CreateClient();
 
     protected override IHost CreateHost(IHostBuilder builder)
     {
+        _connection = new SqliteConnection("DataSource=:memory:");
+        _connection.Open();
+
         builder
-            .ConfigureServices(TestServices)
-            .ConfigureServices(TestStorage);
+            .ConfigureServices(services => TestStorage(services, _connection.ConnectionString))
+            .ConfigureServices(TestServices);
 
         return base.CreateHost(builder);
     }
@@ -46,4 +45,10 @@ public class TestApplication : WebApplicationFactory<Program>
 
     public async Task SeedTestData()
         => await GetService<Seeder>().Seed();
+
+    public override ValueTask DisposeAsync()
+    {
+        _connection.Dispose();
+        return base.DisposeAsync();
+    }
 }

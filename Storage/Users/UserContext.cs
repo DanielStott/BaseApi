@@ -18,9 +18,10 @@ public class UserContext : DbContext, IContext<User>
         Entities = Users.AsQueryable();
     }
 
-    public void BuildTable()
+    public async Task BuildTable()
     {
-        Database.EnsureCreatedAsync();
+        await Database.EnsureCreatedAsync();
+        await SaveChangesAsync();
     }
 
     public async Task<User> Add(User entity)
@@ -32,7 +33,7 @@ public class UserContext : DbContext, IContext<User>
 
     public async Task<IEnumerable<User>> AddRange(IEnumerable<User> entities)
     {
-        await Users.AddRangeAsync(entities);
+        await AddRangeAsync(entities);
         await SaveChangesAsync();
         return entities;
     }
@@ -46,7 +47,7 @@ public class UserContext : DbContext, IContext<User>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new UserDbConfiguration());
+        base.OnModelCreating(modelBuilder);
     }
 }
