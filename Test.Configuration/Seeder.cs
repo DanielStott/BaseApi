@@ -1,6 +1,4 @@
 ﻿using Data;
-using Domain.Shared.Interfaces;
-using Domain.Users.Models;
 using Storage.Users;
 
 namespace Test.Configuration;
@@ -13,10 +11,7 @@ public class Seeder
 
     public async Task Seed()
     {
-        // await _userContext.BuildTable();
-        await _userContext.Database.EnsureCreatedAsync();
-        await _userContext.SaveChangesAsync();
+        await _userContext.BuildTable();
         await _userContext.AddRange(TestSuites.GetAll(x => x.Users));
-        await _userContext.SaveChangesAsync();
     }
 }

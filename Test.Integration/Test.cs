@@ -7,12 +7,8 @@ namespace Test.Integration;
 [SetUpFixture]
 public class Test
 {
-    public static TestApplication Application = new ();
+    public static readonly TestApplication Application = new ();
 
     [OneTimeSetUp]
-    public async Task Setup()
-    {
-        Application = new TestApplication();
-        await Application.SeedTestData();
-    }
+    public async Task Setup() => await Application.SeedTestData();
 }

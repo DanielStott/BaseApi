@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Api.Controllers.Users;
-using Domain.Users.Handlers;
 using NUnit.Framework;
 
 namespace Test.Integration.Users;
@@ -13,7 +11,14 @@ public class UserTests : BaseTest
     [Test]
     public async Task successfully_create_user()
     {
-        var command = new CreateUser.Command("Test", "test@test.com", "password", "Daniel", "Stott");
+        var command = new
+        {
+            Username = "Test",
+            Email = "test@test.com",
+            Password = "password",
+            FirstName = "Daniel",
+            LastName = "Test",
+        };
 
         var (response, user) = await Api.Post("/api/users/create", command);
 

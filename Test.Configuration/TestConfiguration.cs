@@ -12,11 +12,11 @@ public static class TestConfiguration
         services.AddScoped<Seeder>();
     }
 
-    public static void TestStorage(IServiceCollection services, string connectionString)
+    public static void TestStorage(IServiceCollection services)
     {
         services.RemoveAll<DbContextOptions<UserContext>>();
 
         services.AddDbContext<UserContext>(options =>
-            options.UseSqlite(connectionString));
+            options.UseInMemoryDatabase("TestDb"));
     }
 }
