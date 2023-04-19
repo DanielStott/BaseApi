@@ -20,7 +20,7 @@ public class UserTests : BaseTest
             LastName = "Test",
         };
 
-        var (response, user) = await Api.Post("/api/users/create", command);
+        var (response, user) = await Api.Post("/api/users", command);
 
         Assert.Multiple(() =>
         {

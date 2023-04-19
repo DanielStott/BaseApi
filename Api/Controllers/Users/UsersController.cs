@@ -18,14 +18,14 @@ public class UsersController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpPost("Create", Name = nameof(Create))]
+    [HttpPost]
     public async Task<ActionResult<UserViewModel>> Create(CreateUser.Command command)
     {
         var user = await _mediator.Send(command);
         return _mapper.Map<UserViewModel>(user);
     }
 
-    [HttpGet("{id:guid}", Name = nameof(Get))]
+    [HttpGet("{id:guid}")]
     public async Task<ActionResult<UserViewModel>> Get(Guid id)
     {
         var user = await _mediator.Send(new GetUser.Query(id));
