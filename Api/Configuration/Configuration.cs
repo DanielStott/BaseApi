@@ -1,9 +1,9 @@
 ﻿using Api.Configuration.Middleware;
+using Data.Users;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using Storage.Users;
 
 namespace Api.Configuration;
 

@@ -1,5 +1,5 @@
-﻿using Data;
-using Storage.Users;
+﻿using Data.Users;
+using Test.Data;
 
 namespace Test.Configuration;
 

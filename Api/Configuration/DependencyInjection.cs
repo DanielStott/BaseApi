@@ -1,10 +1,10 @@
 ﻿using Api.Configuration.Mediator;
+using Data.Users;
 using Domain.Shared.Interfaces;
 using Domain.Users.Interfaces;
 using Domain.Users.Models;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Storage.Users;
 
 namespace Api.Configuration;
 

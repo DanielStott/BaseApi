@@ -12,7 +12,7 @@ public abstract class BaseTest
     [SetUp]
     public virtual Task Setup()
     {
-        Api = Test.Application.GetClient() ??
+        Api = TestFixture.Application.GetClient() ??
               throw new InvalidOperationException("Create a new instance of TestApplication<T> before calling BaseTest<T>");
         return Task.CompletedTask;
     }

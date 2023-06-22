@@ -1,6 +1,6 @@
 ﻿using Domain.Users.Models;
 
-namespace Data;
+namespace Test.Data;
 
 public interface ITestSuite
 {

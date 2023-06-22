@@ -5,7 +5,7 @@ using Test.Configuration;
 namespace Test.Integration;
 
 [SetUpFixture]
-public class Test
+public class TestFixture
 {
     public static readonly TestApplication Application = new ();
 

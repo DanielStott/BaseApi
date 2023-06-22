@@ -4,7 +4,6 @@
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>default</LangVersion>
         <CodeAnalysisRuleSet>../stylecop.ruleset</CodeAnalysisRuleSet>
-        <RootNamespace>Data</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

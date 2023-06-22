@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Domain.Users.Models;
 
-namespace Data;
+namespace Test.Data;
 
 public class Users : ITestData<User>
 {

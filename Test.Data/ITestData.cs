@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Data;
+namespace Test.Data;
 
 public interface ITestData<T> where T : class
 {
