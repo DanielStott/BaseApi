@@ -17,25 +17,25 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<User> GetByEmailOrUsername(string email, string username)
+    public async Task<User?> GetByEmailOrUsername(string email, string username)
     {
         return await _context.Entities
             .FirstOrDefaultAsync(e => e.Email == email || e.Username == username);
     }
 
-    public async Task<User> GetById(Guid id)
+    public async Task<User?> GetById(Guid id)
     {
         return await _context.Entities
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
-    public async Task<User> Get(User entity)
+    public async Task<User?> Get(User entity)
     {
         return await _context.Entities
             .FirstOrDefaultAsync(e => e == entity);
     }
 
-    public async Task<IEnumerable<User>> GetAll()
+    public async Task<IEnumerable<User?>> GetAll()
     {
         return await _context.Entities
             .ToListAsync();

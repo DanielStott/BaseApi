@@ -21,6 +21,9 @@ public static class ExceptionMiddleware
 
         switch (ex)
         {
+            case null:
+                await next();
+                break;
             case ICustomException exception:
                 await WriteCustomResponse(exception, httpContext);
                 break;
@@ -104,7 +107,8 @@ public static class ExceptionMiddleware
         httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
         problem.Extensions["traceId"] = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
 
-        await httpContext.Response.WriteAsJsonAsync(problem);
+        if (httpContext != null)
+            await httpContext.Response.WriteAsJsonAsync(problem);
     }
 
     private static async Task WriteResponse(HttpContext httpContext, ProblemDetails problem)
@@ -113,6 +117,7 @@ public static class ExceptionMiddleware
         httpContext.Response.StatusCode = problem.Status ?? 500;
         problem.Extensions["traceId"] = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
 
-        await httpContext.Response.WriteAsJsonAsync(problem);
+        if (httpContext != null)
+            await httpContext.Response.WriteAsJsonAsync(problem);
     }
 }

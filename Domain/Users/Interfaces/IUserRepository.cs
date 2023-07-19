@@ -6,5 +6,5 @@ namespace Domain.Users.Interfaces;
 
 public interface IUserRepository : IRepository<User>
 {
-    Task<User> GetByEmailOrUsername(string email, string username);
+    Task<User?> GetByEmailOrUsername(string email, string username);
 }

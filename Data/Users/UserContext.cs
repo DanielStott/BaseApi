@@ -15,7 +15,7 @@ public class UserContext : DbContext, IContext<User>
     public UserContext(DbContextOptions<UserContext> options)
         : base(options)
     {
-        Entities = Users.AsQueryable();
+        Entities = Users!.AsQueryable();
     }
 
     public async Task BuildTable()

@@ -10,13 +10,12 @@ public class User : Entity
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
 
-    public static User Create(string username, string email, string password, string firstName, string lastName)
-        => new ()
-        {
-            Username = username,
-            Email = email,
-            Password = password,
-            FirstName = firstName,
-            LastName = lastName,
-        };
+    public User(string username, string email, string password, string firstName, string lastName)
+    {
+        Username = username;
+        Email = email;
+        Password = password;
+        FirstName = firstName;
+        LastName = lastName;
+    }
 }
