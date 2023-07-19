@@ -5,7 +5,6 @@ namespace Domain.Employees.Models;
 
 public class Employee : Entity
 {
-    public Guid Id { get; private init; }
     public string Email { get; private set; }
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
@@ -13,7 +12,6 @@ public class Employee : Entity
 
     public Employee(string email, string firstName, string lastName)
     {
-        Id = Guid.NewGuid();
         Email = email;
         FirstName = firstName;
         LastName = lastName;

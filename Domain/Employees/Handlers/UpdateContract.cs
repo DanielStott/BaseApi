@@ -54,6 +54,9 @@ public class UpdateContract
         {
             var employee = await _employeeRepository.GetById(command.EmployeeId);
 
+            if (employee is null)
+                throw new NotFoundException("Employee not found");
+
             employee.SetContract(command.JobTitle, command.Salary, command.StartDate, command.EndDate);
 
             await _employeeRepository.Update(employee);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Shared.Exceptions;
 using Domain.Users.Interfaces;
 using Domain.Users.Models;
 using MediatR;
@@ -17,7 +18,14 @@ public class GetUser
 
         public Handler(IUserRepository userRepository) => _userRepository = userRepository;
 
-        public async Task<User> Handle(Query request, CancellationToken cancellationToken) =>
-            await _userRepository.GetById(request.UserId);
+        public async Task<User> Handle(Query request, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.GetById(request.UserId);
+
+            if (user is null)
+                throw new NotFoundException("User not found");
+
+            return user;
+        }
     }
 }

@@ -39,7 +39,7 @@ public class RequestFailure : Exception
         if (problemDetails?.Errors == null)
             return null;
 
-        Dictionary<string, List<Error>> errors = new();
+        Dictionary<string, List<Error>> errors = new ();
         foreach (var (k, v) in problemDetails.Errors)
         {
             var errorList = v.Select(error => new Error(k, error)).ToList();

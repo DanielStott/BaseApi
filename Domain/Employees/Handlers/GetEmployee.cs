@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain.Employees.Interfaces;
 using Domain.Employees.Models;
+using Domain.Shared.Exceptions;
 using MediatR;
 
 namespace Domain.Employees.Handlers;
@@ -17,7 +18,14 @@ public class GetEmployee
 
         public Handler(IEmployeeRepository employeeRepository) => _employeeRepository = employeeRepository;
 
-        public async Task<Employee> Handle(Query request, CancellationToken cancellationToken) =>
-            await _employeeRepository.GetById(request.EmployeeId);
+        public async Task<Employee> Handle(Query request, CancellationToken cancellationToken)
+        {
+            var employee = await _employeeRepository.GetById(request.EmployeeId);
+
+            if (employee is null)
+                throw new NotFoundException("Employee not found");
+
+            return employee;
+        }
     }
 }
