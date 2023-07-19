@@ -24,7 +24,15 @@ public static class Configuration
         services.AddAutoMapper(typeof(Program));
         services.AddValidatorsFromAssembly(assembly);
         services.AddLogging(configuration);
-        services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseApi", Version = "v1" }));
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "BaseApi",
+                Version = "v1",
+            });
+            c.CustomSchemaIds(x => x.FullName);
+        });
 
         return webApp;
     }

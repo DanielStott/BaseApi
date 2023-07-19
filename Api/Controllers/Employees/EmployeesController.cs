@@ -33,7 +33,7 @@ public class EmployeesController : ControllerBase
         return _mapper.Map<EmployeeViewModel>(employee);
     }
 
-    [HttpPut("{id:guid}")]
+    [HttpPut("{id:guid}/contract")]
     public async Task<ActionResult<EmployeeContractViewModel>> UpdateContract(Guid id, UpdateContract.Command command)
     {
         var employee = await _mediator.Send(command.WithId(id));
