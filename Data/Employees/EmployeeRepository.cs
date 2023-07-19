@@ -19,7 +19,11 @@ public class EmployeeRepository : IEmployeeRepository
     public async Task<Employee?> Get(Employee entity) =>
         await _employeeStore.Find(x => x == entity);
 
+    public async Task<Employee?> GetByEmail(string email) =>
+        await _employeeStore.Find(x => x.Email == email);
+
     public Task<IEnumerable<Employee?>> GetAll() => throw new NotImplementedException();
+
     public async Task<Employee> Add(Employee entity)
     {
         await _employeeStore.Insert(entity);
@@ -37,7 +41,4 @@ public class EmployeeRepository : IEmployeeRepository
         await _employeeStore.Replace(x => x.Id == entity.Id, entity);
         return entity;
     }
-
-    public async Task<Employee?> GetByEmail(string email) =>
-        await _employeeStore.Find(x => x.Email == email);
 }

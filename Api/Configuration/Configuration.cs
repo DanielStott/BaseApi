@@ -17,7 +17,7 @@ public static class Configuration
         services
             .AddControllers()
             .AddApplicationPart(AppDomain.CurrentDomain.Load("Api"));
-        services.AddDependencyInjection();
+        services.AddDependencyInjection(configuration);
 
         var assembly = AppDomain.CurrentDomain.Load("Domain");
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
