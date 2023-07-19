@@ -7,6 +7,6 @@ public class EmployeesMappings : Profile
 {
     public EmployeesMappings()
     {
-        CreateMap<Employee, EmployeesViewModel>();
+        CreateMap<Employee, EmployeeViewModel>();
     }
 }

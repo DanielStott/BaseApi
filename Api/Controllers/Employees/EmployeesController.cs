@@ -20,16 +20,23 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<EmployeesViewModel>> Create(CreateEmployee.Command command)
+    public async Task<ActionResult<EmployeeViewModel>> Create(CreateEmployee.Command command)
     {
         var employee = await _mediator.Send(command);
-        return _mapper.Map<EmployeesViewModel>(employee);
+        return _mapper.Map<EmployeeViewModel>(employee);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<EmployeesViewModel>> Get(Guid id)
+    public async Task<ActionResult<EmployeeViewModel>> Get(Guid id)
     {
         var employee = await _mediator.Send(new GetUser.Query(id));
-        return _mapper.Map<EmployeesViewModel>(employee);
+        return _mapper.Map<EmployeeViewModel>(employee);
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<EmployeeViewModel>> UpdateContract(Guid id, UpdateContract.Command command)
+    {
+        var employee = await _mediator.Send(command.WithId(id));
+        return _mapper.Map<EmployeeViewModel>(employee);
     }
 }
