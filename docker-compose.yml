@@ -10,3 +10,11 @@ services:
       SA_PASSWORD: 'testPW12345678!'
     ports:
       - '30001:1433'
+        
+  mongo:
+    image: mongo
+    container_name: Mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin 
+      MONGO_INITDB_ROOT_PASSWORD: testPW12345678!

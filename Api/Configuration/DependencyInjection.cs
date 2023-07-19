@@ -27,7 +27,6 @@ public static class DependencyInjection
 
     private static void AddMongoDbDependencies(this IServiceCollection services, ConfigurationManager configuration)
     {
-        services.TryAddSingleton<MongoDatabaseFactory>(_ => new MongoDatabaseFactory(configuration.GetConnectionString("mongoDb"), "BaseApi"));
-
+        services.TryAddSingleton<MongoDatabaseFactory>(_ => new MongoDatabaseFactory(configuration.GetConnectionString("MongoDb"), "BaseApi"));
     }
 }
