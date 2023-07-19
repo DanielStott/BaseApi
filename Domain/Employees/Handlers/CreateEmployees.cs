@@ -19,15 +19,9 @@ public class CreateEmployees
             RuleForEach(x => x.Employees)
                 .ChildRules(Rules =>
                 {
-                    Rules.RuleFor(m => m.Username)
-                        .MaximumLength(30)
-                        .NotEmpty();
                     Rules.RuleFor(m => m.Email)
                         .MaximumLength(255)
                         .EmailAddress()
-                        .NotEmpty();
-                    Rules.RuleFor(m => m.Password)
-                        .MaximumLength(255)
                         .NotEmpty();
                     Rules.RuleFor(m => m.FirstName)
                         .MaximumLength(255)
