@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Employees.Handlers;
 using Domain.Users.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,16 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<EmployeesViewModel>> Create(CreateUser.Command command)
+    public async Task<ActionResult<EmployeesViewModel>> Create(CreateEmployee.Command command)
     {
-        var user = await _mediator.Send(command);
-        return _mapper.Map<EmployeesViewModel>(user);
+        var employee = await _mediator.Send(command);
+        return _mapper.Map<EmployeesViewModel>(employee);
     }
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<EmployeesViewModel>> Get(Guid id)
     {
-        var user = await _mediator.Send(new GetUser.Query(id));
-        return _mapper.Map<EmployeesViewModel>(user);
+        var employee = await _mediator.Send(new GetUser.Query(id));
+        return _mapper.Map<EmployeesViewModel>(employee);
     }
 }

@@ -11,9 +11,7 @@ namespace Domain.Employees.Handlers;
 public class CreateEmployee
 {
     public record Command(
-        string Username,
         string Email,
-        string Password,
         string FirstName,
         string LastName) : IRequest<Employee>;
 
@@ -21,15 +19,9 @@ public class CreateEmployee
     {
         public Validator()
         {
-            RuleFor(m => m.Username)
-                .MaximumLength(30)
-                .NotEmpty();
             RuleFor(m => m.Email)
                 .MaximumLength(255)
                 .EmailAddress()
-                .NotEmpty();
-            RuleFor(m => m.Password)
-                .MaximumLength(255)
                 .NotEmpty();
             RuleFor(m => m.FirstName)
                 .MaximumLength(255)
@@ -50,7 +42,7 @@ public class CreateEmployee
         {
             await ValidateRequest(command);
 
-            var employee = Employee.Create(command.Username, command.Email, command.Password, command.FirstName, command.LastName);
+            var employee = new Employee(command.Email, command.FirstName, command.LastName);
 
             var createdUser = await _employeeRepository.Add(employee);
 
@@ -59,13 +51,13 @@ public class CreateEmployee
 
         private async Task ValidateRequest(Command command)
         {
-            var user = await _employeeRepository.GetByEmailOrUsername(command.Email, command.Username);
+            var employee = await _employeeRepository.GetByEmail(command.Email);
 
-            if (user is null)
+            if (employee is null)
                 return;
 
-            if (user.Username == command.Username)
-                throw new AlreadyExistsExceptions(nameof(command.Username));
+            if (employee.Email == command.Email)
+                throw new AlreadyExistsExceptions(nameof(command.Email));
 
             throw new AlreadyExistsExceptions(nameof(command.Email));
         }
