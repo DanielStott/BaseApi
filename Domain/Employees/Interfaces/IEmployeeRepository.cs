@@ -6,5 +6,5 @@ namespace Domain.Employees.Interfaces;
 
 public interface IEmployeeRepository : IRepository<Employee>
 {
-    Task<Employee> GetByEmail(string email);
+    Task<Employee?> GetByEmail(string email);
 }
