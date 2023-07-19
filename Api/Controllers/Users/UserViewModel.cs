@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Api.Controllers.Users;
+﻿namespace Api.Controllers.Users;
 
 public class UserViewModel
 {
