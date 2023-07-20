@@ -75,6 +75,38 @@ public class EmployeeTests : BaseTest
     }
 
     [Test]
+    public void fail_on_employee_not_found()
+    {
+        var requestFailure = Assert.ThrowsAsync<RequestFailure>(async () => await Api.Get($"/api/employees/{Guid.NewGuid()}"));
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(requestFailure?.Response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+            Assert.That(requestFailure.Message.Contains("Employee could not be found"));
+        });
+    }
+
+    [Test]
+    public void fail_on_contract_not_found()
+    {
+        var command = new
+        {
+            JobTitle = "Scientist",
+            Salary = 1m,
+            StartDate = DateTime.UtcNow,
+            EndDate = DateTime.UtcNow.AddDays(1),
+        };
+
+        var requestFailure = Assert.ThrowsAsync<RequestFailure>(async () => await Api.Put($"/api/employees/{Guid.NewGuid()}/contract", command));
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(requestFailure?.Response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+            Assert.That(requestFailure.Message.Contains("Employee could not be found"));
+        });
+    }
+
+    [Test]
     public void fail_on_invalid_create_employee()
     {
         var command = new

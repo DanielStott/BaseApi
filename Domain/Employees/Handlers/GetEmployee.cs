@@ -23,7 +23,7 @@ public class GetEmployee
             var employee = await _employeeRepository.GetById(request.EmployeeId);
 
             if (employee is null)
-                throw new NotFoundException("Employee not found");
+                throw new NotFoundException(nameof(Employee));
 
             return employee;
         }
