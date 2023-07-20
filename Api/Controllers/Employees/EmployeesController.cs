@@ -36,7 +36,7 @@ public class EmployeesController : ControllerBase
     [HttpPut("{id:guid}/contract")]
     public async Task<ActionResult<EmployeeContractViewModel>> UpdateContract(Guid id, UpdateContract.Command command)
     {
-        var employee = await _mediator.Send(command.WithId(id));
-        return _mapper.Map<EmployeeContractViewModel>(employee);
+        var contract = await _mediator.Send(command.WithId(id));
+        return _mapper.Map<EmployeeContractViewModel>(contract);
     }
 }

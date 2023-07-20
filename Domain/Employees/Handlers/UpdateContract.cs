@@ -15,7 +15,7 @@ public class UpdateContract
         string JobTitle,
         decimal Salary,
         DateTime StartDate,
-        DateTime? EndDate = null) : IRequest<Employee>
+        DateTime? EndDate = null) : IRequest<Contract>
     {
         public Guid EmployeeId { get; init; }
 
@@ -44,13 +44,13 @@ public class UpdateContract
         }
     }
 
-    public class Handler : IRequestHandler<Command, Employee>
+    public class Handler : IRequestHandler<Command, Contract>
     {
         private readonly IEmployeeRepository _employeeRepository;
 
         public Handler(IEmployeeRepository employeeRepository) => _employeeRepository = employeeRepository;
 
-        public async Task<Employee> Handle(Command command, CancellationToken cancellationToken)
+        public async Task<Contract> Handle(Command command, CancellationToken cancellationToken)
         {
             var employee = await _employeeRepository.GetById(command.EmployeeId);
 
@@ -61,7 +61,7 @@ public class UpdateContract
 
             await _employeeRepository.Update(employee);
 
-            return employee;
+            return employee.Contract!;
         }
     }
 }
