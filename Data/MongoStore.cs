@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Domain.Shared.Interfaces;
+using Domain.Shared.Models;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
 namespace Data;
 
-public class MongoStore<T> : IMongoStore<T> where T : class
+public class MongoStore<T> : IMongoStore<T> where T : Entity
 {
     private readonly IMongoCollection<T> _collection;
 
@@ -19,7 +20,7 @@ public class MongoStore<T> : IMongoStore<T> where T : class
         await _collection.AsQueryable().FirstOrDefaultAsync(predicate);
 
     public async Task<IEnumerable<T>> FindAll(Expression<Func<T, bool>> predicate) =>
-        (await _collection.FindAsync<T>(predicate)).ToEnumerable();
+        (await _collection.AsQueryable().Where(predicate).ToCursorAsync()).ToEnumerable();
 
     public async Task Insert(T document) =>
         await _collection.InsertOneAsync(document);
