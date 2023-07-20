@@ -13,7 +13,7 @@ public class MongoStore<T> : IMongoStore<T> where T : class
     private readonly IMongoCollection<T> _collection;
 
     public MongoStore(IMongoDatabase database) =>
-        _collection = database.GetCollection<T>(nameof(T));
+        _collection = database.GetCollection<T>($"{typeof(T).Name}s");
 
     public async Task<T?> Find(Expression<Func<T, bool>> predicate) =>
         await _collection.AsQueryable().FirstOrDefaultAsync(predicate);
