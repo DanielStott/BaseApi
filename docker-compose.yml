@@ -10,3 +10,12 @@ services:
       SA_PASSWORD: 'testPW12345678!'
     ports:
       - '30001:1433'
+        
+  mongo:
+    image: mongo
+    container_name: Mongo
+    restart: unless-stopped
+    volumes:
+      - './dockervolume/mongodb:/data/db'
+    ports:
+      - '27017:27017'

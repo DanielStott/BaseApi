@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Domain.Shared.Attributes;
 using Domain.Shared.Exceptions;
 using Domain.Users.Interfaces;
 using Domain.Users.Models;
@@ -51,7 +50,7 @@ public class CreateUser
         {
             await ValidateRequest(command);
 
-            var user = User.Create(command.Username, command.Email, command.Password, command.FirstName, command.LastName);
+            var user = new User(command.Username, command.Email, command.Password, command.FirstName, command.LastName);
 
             var createdUser = await _userRepository.Add(user);
 

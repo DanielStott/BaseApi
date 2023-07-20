@@ -11,4 +11,7 @@ public class TestFixture
 
     [OneTimeSetUp]
     public async Task Setup() => await Application.SeedTestData();
+
+    [OneTimeTearDown]
+    public async Task TearDown() => await Application.DisposeAsync();
 }

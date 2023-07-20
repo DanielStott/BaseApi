@@ -42,9 +42,7 @@ public static class HttpClientExtensions
     private static async Task<(HttpResponseMessage, TResponse)> Result<TResponse>(HttpResponseMessage response)
     {
         if (response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.Redirect)
-        {
             return (response, await GetResult<TResponse>(response));
-        }
 
         throw await RequestFailure.From(response);
     }

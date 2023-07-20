@@ -12,47 +12,30 @@ public class UserRepository : IUserRepository
 {
     private readonly IContext<User> _context;
 
-    public UserRepository(IContext<User> context)
-    {
-        _context = context;
-    }
+    public UserRepository(IContext<User> context) => _context = context;
 
-    public async Task<User> GetByEmailOrUsername(string email, string username)
-    {
-        return await _context.Entities
+    public async Task<User?> GetByEmailOrUsername(string email, string username) =>
+        await _context.Entities
             .FirstOrDefaultAsync(e => e.Email == email || e.Username == username);
-    }
 
-    public async Task<User> GetById(Guid id)
-    {
-        return await _context.Entities
+    public async Task<User?> GetById(Guid id) =>
+        await _context.Entities
             .FirstOrDefaultAsync(e => e.Id == id);
-    }
 
-    public async Task<User> Get(User entity)
-    {
-        return await _context.Entities
+    public async Task<User?> Get(User entity) =>
+        await _context.Entities
             .FirstOrDefaultAsync(e => e == entity);
-    }
 
-    public async Task<IEnumerable<User>> GetAll()
-    {
-        return await _context.Entities
+    public async Task<IEnumerable<User?>> GetAll() =>
+        await _context.Entities
             .ToListAsync();
-    }
 
-    public async Task<User> Add(User entity)
-    {
-        return await _context.Add(entity);
-    }
+    public async Task<User> Add(User entity) =>
+        await _context.Add(entity);
 
-    public async Task<IEnumerable<User>> AddRange(IEnumerable<User> entities)
-    {
-        return await _context.AddRange(entities);
-    }
+    public async Task<IEnumerable<User>> AddRange(IEnumerable<User> entities) =>
+        await _context.AddRange(entities);
 
-    public async Task<User> Update(User entity)
-    {
-        return await _context.Update(entity);
-    }
+    public async Task<User> Update(User entity) =>
+        await _context.Update(entity);
 }

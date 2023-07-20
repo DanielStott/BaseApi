@@ -17,14 +17,22 @@ public static class Configuration
         services
             .AddControllers()
             .AddApplicationPart(AppDomain.CurrentDomain.Load("Api"));
-        services.AddDependencyInjection();
+        services.AddDependencyInjection(configuration);
 
         var assembly = AppDomain.CurrentDomain.Load("Domain");
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
         services.AddAutoMapper(typeof(Program));
         services.AddValidatorsFromAssembly(assembly);
         services.AddLogging(configuration);
-        services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseApi", Version = "v1" }));
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "BaseApi",
+                Version = "v1",
+            });
+            c.CustomSchemaIds(x => x.FullName);
+        });
 
         return webApp;
     }

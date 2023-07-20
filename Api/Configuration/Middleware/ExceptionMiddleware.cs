@@ -1,12 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Domain.Shared.Interfaces;
 using FluentValidation;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Configuration.Middleware;
@@ -26,6 +21,9 @@ public static class ExceptionMiddleware
 
         switch (ex)
         {
+            case null:
+                await next();
+                break;
             case ICustomException exception:
                 await WriteCustomResponse(exception, httpContext);
                 break;
@@ -109,7 +107,8 @@ public static class ExceptionMiddleware
         httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
         problem.Extensions["traceId"] = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
 
-        await httpContext.Response.WriteAsJsonAsync(problem);
+        if (httpContext != null)
+            await httpContext.Response.WriteAsJsonAsync(problem);
     }
 
     private static async Task WriteResponse(HttpContext httpContext, ProblemDetails problem)
@@ -118,6 +117,7 @@ public static class ExceptionMiddleware
         httpContext.Response.StatusCode = problem.Status ?? 500;
         problem.Extensions["traceId"] = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
 
-        await httpContext.Response.WriteAsJsonAsync(problem);
+        if (httpContext != null)
+            await httpContext.Response.WriteAsJsonAsync(problem);
     }
 }

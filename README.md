@@ -1,10 +1,11 @@
 # BaseApi
-BaseApi is a .NET Core 7.0 Web API project that uses Docker containers for development and deployment. It is a starting point for building a new API project. 
+BaseApi is a .NET Core 7.0 Web API project that uses Docker containers for development and deployment. It is a starting point for building a new API project. Contains both Sql and Mongo examples.
 The project is built using the following technologies:
 * MediatR for CQRS
 * FluentValidation for validation
 * AutoMapper for mapping
-* Entity Framework Core for data access
+* Entity Framework Core for data access (UsersController)
+* MongoDb Driver for data access (EmployeesController)
 * Serilog for logging
 * Swagger for API documentation
 * WebApplicationFactory and NUnit for integration testing

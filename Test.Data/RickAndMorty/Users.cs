@@ -11,7 +11,7 @@ public class Users : ITestData<User>
 
     static Users()
     {
-        Rick = User.Create("Rick", "Rick@test.com", "Password", "Rick", "Sanchez");
-        Morty = User.Create("Morty", "Morty@test.com", "Password", "Morty", "Sanchez");
+        Rick = new User("Rick", "Rick@test.com", "Password", "Rick", "Sanchez");
+        Morty = new User("Morty", "Morty@test.com", "Password", "Morty", "Smith");
     }
 }
