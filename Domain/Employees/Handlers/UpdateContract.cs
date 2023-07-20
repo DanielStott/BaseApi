@@ -40,7 +40,7 @@ public class UpdateContract
             RuleFor(m => m.EndDate)
                 .GreaterThan(m => m.StartDate)
                 .When(m => m.EndDate.HasValue)
-                .WithMessage("End date must be after the start date");
+                .WithMessage("'End Date' must be after the start date.");
         }
     }
 
