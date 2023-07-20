@@ -29,7 +29,7 @@ public class EmployeesController : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<EmployeeViewModel>> Get(Guid id)
     {
-        var employee = await _mediator.Send(new GetUser.Query(id));
+        var employee = await _mediator.Send(new GetEmployee.Query(id));
         return _mapper.Map<EmployeeViewModel>(employee);
     }
 
