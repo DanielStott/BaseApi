@@ -36,9 +36,6 @@ public class EmployeeRepository : IEmployeeRepository
         return entities;
     }
 
-    public async Task<Employee> Update(Employee entity)
-    {
+    public async Task<Employee> Update(Employee entity) =>
         await _employeeStore.Replace(x => x.Id == entity.Id, entity);
-        return entity;
-    }
 }

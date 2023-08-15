@@ -11,6 +11,6 @@ public interface IMongoStore<T>
     Task<IEnumerable<T>> FindAll(Expression<Func<T, bool>> predicate);
     Task Insert(T document);
     Task InsertMany(IEnumerable<T> documents);
-    Task Replace(Expression<Func<T, bool>> predicate, T document);
+    Task<T> Replace(Expression<Func<T, bool>> predicate, T document);
     Task Delete(Expression<Func<T, bool>> predicate);
 }

@@ -28,8 +28,8 @@ public class MongoStore<T> : IMongoStore<T> where T : Entity
     public async Task InsertMany(IEnumerable<T> documents) =>
         await _collection.InsertManyAsync(documents);
 
-    public async Task Replace(Expression<Func<T, bool>> predicate, T document) =>
-        await _collection.ReplaceOneAsync(predicate, document);
+    public async Task<T> Replace(Expression<Func<T, bool>> predicate, T document) =>
+        await _collection.FindOneAndReplaceAsync(predicate, document);
 
     public async Task Delete(Expression<Func<T, bool>> predicate) =>
         await _collection.DeleteOneAsync(predicate);
