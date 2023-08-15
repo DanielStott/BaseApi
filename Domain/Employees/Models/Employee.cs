@@ -5,9 +5,9 @@ namespace Domain.Employees.Models;
 
 public class Employee : Entity
 {
-    public string Email { get; private set; }
-    public string FirstName { get; private set; }
-    public string LastName { get; private set; }
+    public string Email { get; }
+    public string FirstName { get; }
+    public string LastName { get; }
     public Contract? Contract { get; private set; }
 
     public Employee(string email, string firstName, string lastName)
